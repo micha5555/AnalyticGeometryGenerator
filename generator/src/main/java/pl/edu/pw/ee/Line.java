@@ -56,7 +56,19 @@ public class Line {
         return new Point((p1.getX()+p2.getX())/2, (p1.getY() + p2.getY())/2);
     }
 
+    //TODO przemyśleć
     public boolean checkPerpendicularity(Line second){
+        double[] tmpThis = this.getFunc();
+        double[] tmpSecond = second.getFunc();
+        if((Double.compare(tmpThis[0], 0) == 0 && Double.compare(tmpSecond[1], 0) == 0) || (Double.compare(tmpThis[1], 0) == 0 && Double.compare(tmpSecond[0], 0) == 0)){
+            return true;
+        }
         return (this.getFunc()[1]*second.getFunc()[1] == -1);
+    }
+
+    //TODO: delete
+    public void showFunc(){
+        double[] tmp = this.getFunc();
+        System.out.printf("y:%f a:%f b:%f\n", tmp[0], tmp[1], tmp[2]);
     }
 }
