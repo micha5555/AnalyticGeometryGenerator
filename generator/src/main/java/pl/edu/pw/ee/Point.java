@@ -11,8 +11,8 @@ public class Point {
     }
 
     public Point(double x, double y){
-        this.x = x;
-        this.y = y;
+        this.x = Common.rnd(x);
+        this.y = Common.rnd(y);
     }
 
     @Override

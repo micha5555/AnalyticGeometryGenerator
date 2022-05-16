@@ -1,16 +1,26 @@
 package pl.edu.pw.ee;
 
+import pl.edu.pw.ee.exceptions.SamePointsException;
+
 public class Line {
     private Point p1, p2;
     public Line(){
-        assignPoints(new Point(), new Point());
+        Point first = new Point();
+        Point second;
+        do{
+            second = new Point();
+        }while(second.equals(first));
+        assignPoints(first, second);
     }
-    public Line(Point p1, Point p2){
+    public Line(Point p1, Point p2) throws SamePointsException{
+        if(p1.equals(p2)){
+            throw new SamePointsException("Points are the same!");
+        }
         assignPoints(p1, p2);
     }
 
     private void assignPoints(Point first, Point second){
-        if(first.getX() < second.getX()){
+        if(first.getX() <= second.getX()){
             this.p1 = first;
             this.p2 = second;
         }
@@ -20,15 +30,15 @@ public class Line {
         }
     }
     
-    public String getP1(){
-        return p1.toString();
+    public Point getP1(){
+        return p1;
     }
 
-    public String getP2(){
-        return p2.toString();
+    public Point getP2(){
+        return p2;
     }
 
-    public double[] getFunc(){
+    public Func getFunc(){
         double a;
         double b = 0;
         double y = 1;
@@ -37,38 +47,79 @@ public class Line {
             b = p1.getX();
             y = 0;
         }
+        else if(Double.compare(p1.getY(), p2.getY()) == 0){
+            a = 0;
+            b = p1.getY();
+            y = 1;
+        }
         else{
-            a = (p2.getY() - p1.getY())/(p2.getX() - p1.getX());
+            a = (Common.rnd(p2.getY() - p1.getY()))/Common.rnd((p2.getX() - p1.getX()));
             double[] firstEquation = {p1.getY(), p1.getX(), 1};
             double[] secondEquation = {p2.getY(), p2.getX(), 1};
-            double tmpA = (firstEquation[0] - firstEquation[2])/firstEquation[1];
+            double tmpA = Common.rnd((firstEquation[0] - firstEquation[2])/firstEquation[1]);
             double[] tmpEquation = {secondEquation[0], secondEquation[1]*tmpA+1};
             b = tmpEquation[0]/tmpEquation[1];
         }
-        return new double[]{y,a,b};
+        return new Func(Common.rnd(y),Common.rnd(a),Common.rnd(b));
     }
 
     public double getLength(){
-        return Math.sqrt(Math.pow((p2.getX() - p1.getX()), 2) + Math.pow((p2.getY() - p1.getY()), 2));
+        double output = Math.sqrt(Math.pow((p2.getX() - p1.getX()), 2) + Math.pow((p2.getY() - p1.getY()), 2));
+        return Common.rnd(output);
     }
 
     public Point getCenter(){
-        return new Point((p1.getX()+p2.getX())/2, (p1.getY() + p2.getY())/2);
+        return new Point(Common.rnd((p1.getX()+p2.getX())/2), Common.rnd((p1.getY() + p2.getY())/2));
+    }
+
+    public MathVector getVector(){
+        return new MathVector(p2.getX() - p1.getX(), p2.getY() - p2.getY());
     }
 
     //TODO przemyśleć
     public boolean checkPerpendicularity(Line second){
-        double[] tmpThis = this.getFunc();
-        double[] tmpSecond = second.getFunc();
-        if((Double.compare(tmpThis[0], 0) == 0 && Double.compare(tmpSecond[1], 0) == 0) || (Double.compare(tmpThis[1], 0) == 0 && Double.compare(tmpSecond[0], 0) == 0)){
+        Func tmpThis = this.getFunc();
+        Func tmpSecond = second.getFunc();
+        if((Double.compare(tmpThis.getY(), 0) == 0 && Double.compare(tmpSecond.getA(), 0) == 0) || (Double.compare(tmpThis.getA(), 0) == 0 && Double.compare(tmpSecond.getY(), 0) == 0)){
             return true;
         }
-        return (this.getFunc()[1]*second.getFunc()[1] == -1);
+        return (this.getFunc().getA()*second.getFunc().getA() == -1);
+    }
+
+    //TODO: poprawic jakby y=0
+    public Func getSymmetrical(){
+        double y = 1; //popr
+        double secondA = 1;
+        Point center = this.getCenter();
+        Func func = this.getFunc();
+        Func sym;
+        if(Double.compare(func.getA(), 0) != 0 && Double.compare(func.getY(), 0) != 0){
+            secondA = Common.rnd(-1/func.getA());
+            sym = new Func(Common.rnd(y), Common.rnd(secondA), countB(center, secondA));
+        }
+        else if(Double.compare(func.getY(), 0) == 0){
+            y = 1;
+            secondA = 0;
+            sym = new Func(y, secondA, center.getY());
+        }
+        else{
+            y = 0;
+            sym = new Func(y, secondA, center.getX());
+        }
+        return sym;
+    }
+
+    //point-punkt przez który przechodzi prosta; aP- współczynnika a
+    private static double countB(Point point, double aP){
+        double aa = (aP*point.getX());
+        double tt =Common.rnd(aa);
+        double output = point.getY()-tt;
+        return Common.rnd(output);
     }
 
     //TODO: delete
     public void showFunc(){
-        double[] tmp = this.getFunc();
-        System.out.printf("y:%f a:%f b:%f\n", tmp[0], tmp[1], tmp[2]);
+        Func tmp = this.getFunc();
+        //System.out.println(tmp);
     }
 }

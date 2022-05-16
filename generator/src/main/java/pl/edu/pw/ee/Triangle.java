@@ -1,22 +1,32 @@
 package pl.edu.pw.ee;
 
+import pl.edu.pw.ee.exceptions.SamePointsException;
 import pl.edu.pw.ee.services.Figure;
 
 public class Triangle implements Figure{
     private Point a, b, c;
     private Line sideAB, sideBC, sideAC;
 
-    public Triangle(){
+    public Triangle() throws SamePointsException{
         a = new Point();
         b = new Point();
         c = new Point();
+        do{
+            b = new Point();
+        }while(a.equals(b));
+        do{
+            c = new Point();
+        }while(a.equals(c) || b.equals(c));
         assignSides();
     }
 
-    public Triangle(Point a, Point b, Point c){
+    public Triangle(Point a, Point b, Point c) throws SamePointsException{
         this.a = a;
         this.b = b;
         this.c = c;
+        if(a.equals(b) || a.equals(c) || b.equals(c)){
+            throw new SamePointsException("Some points in traingle are the same!");
+        }
         assignSides();
     }
 
@@ -31,7 +41,7 @@ public class Triangle implements Figure{
     }
 
     public Point getCenter(){
-        return new Point((a.getX() + b.getX() + c.getX())/3, (a.getY() + b.getY() + c.getY())/3);
+        return new Point(Common.rnd((a.getX() + b.getX() + c.getX())/3), Common.rnd((a.getY() + b.getY() + c.getY())/3));
     }
 
     public double getHeight(Point p){
@@ -43,7 +53,7 @@ public class Triangle implements Figure{
         }else{
             tmp = sideAB;
         }
-        return 2*getArea()/tmp.getLength();
+        return Common.rnd(2*getArea()/tmp.getLength());
     }
 
     public Line getSideAB(){
@@ -58,7 +68,18 @@ public class Triangle implements Figure{
         return sideAC;
     }
 
-    private void assignSides(){
+    public Point getA(){
+        return a;
+    }
+
+    public Point getB(){
+        return b;
+    }
+
+    public Point getC(){
+        return c;
+    }
+    private void assignSides() throws SamePointsException{
         sideAB = new Line(a, b);
         sideBC = new Line(b, c);
         sideAC = new Line(a, c);
