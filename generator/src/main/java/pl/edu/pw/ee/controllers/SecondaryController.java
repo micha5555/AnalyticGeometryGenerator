@@ -1,13 +1,13 @@
-package pl.edu.pw.ee.controllers;
+// package pl.edu.pw.ee.controllers;
 
-import java.io.IOException;
-import javafx.fxml.FXML;
-import pl.edu.pw.ee.App;
+// import java.io.IOException;
+// import javafx.fxml.FXML;
+// import pl.edu.pw.ee.App;
 
-public class SecondaryController {
+// public class SecondaryController {
 
-    @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
-    }
-}
+//     @FXML
+//     private void switchToPrimary() throws IOException {
+//         App.setRoot("primary");
+//     }
+// }

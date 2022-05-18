@@ -1,5 +1,7 @@
 package pl.edu.pw.ee;
 
+import java.util.Random;
+
 import pl.edu.pw.ee.exceptions.SamePointsException;
 
 public class Line {
@@ -54,11 +56,11 @@ public class Line {
         }
         else{
             a = (Common.rnd(p2.getY() - p1.getY()))/Common.rnd((p2.getX() - p1.getX()));
-            double[] firstEquation = {p1.getY(), p1.getX(), 1};
-            double[] secondEquation = {p2.getY(), p2.getX(), 1};
-            double tmpA = Common.rnd((firstEquation[0] - firstEquation[2])/firstEquation[1]);
-            double[] tmpEquation = {secondEquation[0], secondEquation[1]*tmpA+1};
-            b = tmpEquation[0]/tmpEquation[1];
+            // double[] firstEquation = {p1.getY(), p1.getX(), 1};
+            // double[] secondEquation = {p2.getY(), p2.getX(), 1};
+            // double tmpA = Common.rnd((firstEquation[0] - firstEquation[2])/firstEquation[1]);
+            // double[] tmpEquation = {secondEquation[0], secondEquation[1]*tmpA+1};
+            b = p1.getY() - (a * p1.getX());
         }
         return new Func(Common.rnd(y),Common.rnd(a),Common.rnd(b));
     }
@@ -86,6 +88,10 @@ public class Line {
         return (this.getFunc().getA()*second.getFunc().getA() == -1);
     }
 
+    public boolean checkParallelism(Line second){
+        return Double.compare(this.getFunc().getA(), second.getFunc().getA()) == 0;
+    }
+
     //TODO: poprawic jakby y=0
     public Func getSymmetrical(){
         double y = 1; //popr
@@ -109,10 +115,67 @@ public class Line {
         return sym;
     }
 
+    //TODO: nie działa
+    public Line createParallelLine() throws SamePointsException{
+        Random rand = new Random();
+        double primP1x = p1.getX();
+        double primP1y = p1.getY();
+        double primP2x = p2.getX();
+        double primP2y = p2.getY();
+
+        double p1Y = 0;
+        double p2Y = 0;
+        double p2X = 0;
+
+        if(Double.compare(this.getFunc().getY(), 0) == 0){
+            do{
+                p2X = (rand.nextInt(48) - 24)/2;
+            }while(Double.compare(p2X, primP2x) == 0);
+            return new Line(new Point(p2X, -12), new Point(p2X, 12));
+        }
+        else if(Double.compare(this.getFunc().getA(), 0) == 0){
+            do{
+                p2Y = (rand.nextInt(48) - 24)/2;
+            }while(Double.compare(p2Y, primP2y) == 0);
+            return new Line(new Point(-12, p2Y), new Point(12, p2Y));
+        }
+
+        do{
+            p1Y = (rand.nextInt(24) - 12)/2; // <-6; 6>
+        }while(Double.compare(p1Y, primP1y) == 0);
+
+        double diff = primP1y - p1Y;
+        // if(primP2y - diff > 12){
+        //     Func tmp = this.getFunc();
+        //     p2Y = 11.5;
+        //     p2X = Common.rnd((p2Y - tmp.getB())/tmp.getA());
+        // }
+        // else if(primP2y - diff < -12){
+        //     Func tmp = this.getFunc();
+        //     p2Y = -11.5;
+        //     p2X = Common.rnd((p2Y - tmp.getB())/tmp.getA());
+        // }
+        // else{
+            p2Y = primP2y - diff;
+            p2X = primP2x;
+        Line out = new Line(new Point(primP1x, p1Y), new Point(p2X, p2Y));
+        Func tmp = out.getFunc();
+        // }
+        if(p2Y >= 12){
+            p2Y = 11.5;
+            p2X = Common.rnd((p2Y - tmp.getB())/tmp.getA());
+        }
+        else if(p2Y <= -12){
+            p2Y = -11.5;
+            p2X = Common.rnd((p2Y - tmp.getB())/tmp.getA());
+        }
+        return new Line(new Point(primP1x, p1Y), new Point(p2X, p2Y));
+    }
+
     //point-punkt przez który przechodzi prosta; aP- współczynnika a
     private static double countB(Point point, double aP){
         double aa = (aP*point.getX());
-        double tt =Common.rnd(aa);
+        double tt = Common.rnd(aa);
         double output = point.getY()-tt;
         return Common.rnd(output);
     }

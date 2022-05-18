@@ -6,8 +6,8 @@ public class Point {
     private double x, y;
     public Point(){
         Random rand = new Random();
-        x = (rand.nextInt(20+20) - 20)/2;
-        y = (rand.nextInt(20+20) - 20)/2;
+        x = (rand.nextInt(48) - 24)/2;
+        y = (rand.nextInt(48) - 24)/2;
     }
 
     public Point(double x, double y){

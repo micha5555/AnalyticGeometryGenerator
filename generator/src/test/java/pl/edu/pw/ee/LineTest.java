@@ -144,4 +144,38 @@ public class LineTest extends LineTestCommon
         this.checkMathVector(new Line(new Point(0,-7), new Point(0,8)), new MathVector(0,15));
     }
 
+    @Test
+    public void should_CorrectlyCreateParrarelLine() throws SamePointsException{
+        Line l;
+        Line l2;
+        Func lf;
+        Func lf2;
+        for(int i = 0; i < 100000; i++){
+            l = new Line();
+            l2 = l.createParallelLine();
+            if(Double.compare(l.getFunc().getA(), l2.getFunc().getA()) != 0){
+                System.out.println(i);
+                System.out.println(l.getFunc());
+                System.out.println(l2.getFunc());
+                System.out.printf("f1 : (%f, %f) (%f, %f)\nf2 : (%f, %f) (%f, %f)\n", l.getP1().getX(), l.getP1().getY(), l.getP2().getX(), l.getP2().getY(), l2.getP1().getX(), l2.getP1().getY(), l2.getP2().getX(), l2.getP2().getY());
+            }
+            assertTrue(l.checkParallelism(l2));
+        }
+    }
+    // @Test
+    // public void ttt() throws SamePointsException{
+    //     Line l = new Line(new Point(0, 3), new Point(0, 0));
+    //     Line l2 = l.createParallelLine();
+    //     System.out.println(l.getFunc());
+    //     System.out.println(l2.getFunc());
+    //     assertTrue(l.checkParallelism(l2));
+    // }
+
+    @Test
+    public void tt() throws SamePointsException{
+        Line l = new Line(new Point(-9,-12), new Point(3,7));
+        Line l2 = l.createParallelLine();
+        System.out.println(l.getFunc());
+        System.out.println(l2.getFunc());
+    }
 }
