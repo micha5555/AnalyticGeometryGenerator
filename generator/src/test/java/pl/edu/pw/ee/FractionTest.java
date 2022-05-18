@@ -132,4 +132,24 @@ public class FractionTest extends FractionTestCommon{
         checkFraction(result, 74, 143);
     }
 
+    @Test
+    public void should_CompareToReturnOne_WhenCurrentFractionIsBigger() throws IncorrectFractionException{
+        Fraction f1 = new Fraction(3, 5);
+        Fraction f2 = new Fraction(1, 2);
+        assertTrue(f1.compareTo(f2) == 1);
+    }
+
+    @Test
+    public void should_CompareToReturnMinusOne_WhenCurrentFractionIsLower() throws IncorrectFractionException{
+        Fraction f1 = new Fraction(-1, 2);
+        Fraction f2 = new Fraction(1, 2);
+        assertTrue(f1.compareTo(f2) == -1);
+    }
+
+    @Test
+    public void should_CompareToReturnZero_WhenFraactionsAreTheSame() throws IncorrectFractionException{
+        Fraction f1 = new Fraction(2, 3);
+        Fraction f2 = new Fraction(4,6);
+        assertTrue(f1.compareTo(f2) == 0);
+    }
 }

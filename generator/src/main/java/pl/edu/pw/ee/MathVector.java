@@ -2,27 +2,43 @@ package pl.edu.pw.ee;
 
 import java.util.Random;
 
+import pl.edu.pw.ee.exceptions.IncorrectFractionException;
+
 //TODO: Dodać skracanie do najprostszej formy
 public class MathVector {
-    private double xx, yy;
+    private Fraction xx, yy;
 
     public MathVector(){
         Random rand = new Random();
-        xx = rand.nextInt(10 + 10) - 10;
-        yy = rand.nextInt(10 + 10) - 10;
+        try {
+            xx = new Fraction(rand.nextInt(10 + 10) - 10, 1);
+            yy = new Fraction(rand.nextInt(10 + 10) - 10, 1);
+        } catch (IncorrectFractionException e) {
+            e.printStackTrace();
+        }
     }
 
-    public MathVector(double xx, double yy){
-        this.xx = Common.rnd(xx);
-        this.yy = Common.rnd(yy);
+    public MathVector(Fraction xx, Fraction yy){
+        this.xx = xx;
+        this.yy = yy;
     }
     
     public static MathVector addVectors(MathVector v1, MathVector v2){
-        return new MathVector(v1.xx + v2.xx, v1.yy + v2.yy);
+        try {
+            return new MathVector(Fraction.addFractions(v1.xx, v2.xx), Fraction.addFractions(v1.yy, v2.yy));
+        } catch (IncorrectFractionException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static MathVector subtractionVectors(MathVector v1, MathVector v2){
-        return new MathVector(v1.xx - v2.xx, v1.yy - v2.yy);
+        try {
+            return new MathVector(Fraction.subFractions(v1.xx, v2.xx), Fraction.addFractions(v1.yy, v2.yy));
+        } catch (IncorrectFractionException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -34,6 +50,6 @@ public class MathVector {
             return false;
         }
         MathVector p = (MathVector) o;
-        return (Double.compare(xx, p.xx) == 0) && (Double.compare(yy, p.yy) == 0);
+        return (xx.compareTo(p.xx) == 0) && (yy.compareTo(p.yy) == 0);
     }
 }

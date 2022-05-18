@@ -1,13 +1,15 @@
 package pl.edu.pw.ee;
 
+import pl.edu.pw.ee.exceptions.IncorrectFractionException;
+
 public class Func {
-    private double y = 1;
-    private double a;
-    private double b;
-    public Func(double y, double a, double b){
+    private Fraction y = new Fraction(1,1);
+    private Fraction a;
+    private Fraction b;
+    public Func(Fraction y, Fraction a, Fraction b) throws IncorrectFractionException{
         this.y = y;
-        if(Double.compare(y, 0) == 0){
-            this.a = -a;
+        if(y.getNumerator() == 0){
+            this.a = new Fraction(-a.getNumerator(), a.getDenominator());
         }
         else{
             this.a = a;
@@ -15,25 +17,25 @@ public class Func {
         this.b = b;
     }
 
-    public double[] getFunc(){
-        return new double[]{y, a, b};
+    public Fraction[] getFunc(){
+        return new Fraction[]{y, a, b};
     }
 
-    public double getY(){
+    public Fraction getY(){
         return y;
     }
 
-    public double getA(){
+    public Fraction getA(){
         return a;
     }
 
-    public double getB(){
+    public Fraction getB(){
         return b;
     }
 
     @Override
     public String toString(){
-        return String.format("%.2fy=%.2fx+%.2f", y, a, b);
+        return String.format("%sy=%sx+%s", y.toString(), a.toString(), b.toString());
     }
     
 }

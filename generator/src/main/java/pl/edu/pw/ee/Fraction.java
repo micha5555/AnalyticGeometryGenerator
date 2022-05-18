@@ -2,27 +2,41 @@ package pl.edu.pw.ee;
 
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 
-public class Fraction {
+public class Fraction implements Comparable<Fraction>{
     private int numerator; //licznik
     private int denominator; //mianownik
+    private int numeratorSqr = 1; //liczba pod pierwiastkiem przy liczniku
+    private int denominatorSqr = 1; //liczba pd pierwiastkiem przy mianowniku
 
     public Fraction(int numerator, int denominator) throws IncorrectFractionException{
-        if(denominator == 0){
-            throw new IncorrectFractionException("Denominator of fraction cannot be zero!");
-        }
-        this.numerator = numerator;
-        this.denominator = denominator;
-        if(numerator < 0 && denominator < 0){
-            this.numerator = -numerator;
-            this.denominator = -denominator;
-        }
-        else if(numerator > 0 && denominator < 0){
-            this.numerator = -numerator;
-            this.denominator = -denominator;
-        }
+        assignNumeratorDenominator(numerator, denominator);
         this.reduce();
     }
 
+    public Fraction(int numerator, int denominator, int numSqr, int denSqr) throws IncorrectFractionException{
+        assignNumeratorDenominator(numerator, denominator);
+        this.numeratorSqr = numSqr;
+        this.denominatorSqr = denSqr;
+        this.reduce();
+    }
+
+    private void assignNumeratorDenominator(int n, int d) throws IncorrectFractionException{
+        if(d == 0){
+            throw new IncorrectFractionException("Denominator of fraction cannot be zero!");
+        }
+        this.numerator = n;
+        this.denominator = d;
+        if(n < 0 && d < 0){
+            this.numerator = -n;
+            this.denominator = -d;
+        }
+        else if(n > 0 && d < 0){
+            this.numerator = -n;
+            this.denominator = -d;
+        }
+    }
+
+    //dwaa ułamki bo pierwiastki mogą byc różne?
     public static Fraction addFractions(Fraction f1, Fraction f2) throws IncorrectFractionException{
         if(f1.denominator != f2.denominator){
             Fraction[] tmp = makeCommonDenominator(f1, f2);
@@ -32,6 +46,7 @@ public class Fraction {
         return new Fraction(f1.numerator + f2.numerator, f1.denominator);
     }
 
+    //dwa ułamki bo pierwiastki mogąbyć różne?
     public static Fraction subFractions(Fraction f1, Fraction f2) throws IncorrectFractionException{
         if(f1.denominator != f2.denominator){
             Fraction[] tmp = makeCommonDenominator(f1, f2);
@@ -42,14 +57,41 @@ public class Fraction {
     }
 
     public static Fraction multiplyFractions(Fraction f1, Fraction f2) throws IncorrectFractionException{
-        return new Fraction(f1.numerator * f2.numerator, f1.denominator * f2.denominator);
+        return new Fraction(f1.numerator * f2.numerator, f1.denominator * f2.denominator, f1.numeratorSqr * f2.numeratorSqr, f1.denominatorSqr *f2.denominatorSqr);
     }
 
     public static Fraction divFractions(Fraction f1, Fraction f2) throws IncorrectFractionException{
-        return new Fraction(f1.numerator * f2.denominator, f1.denominator * f2.numerator);
+        return new Fraction(f1.numerator * f2.denominator, f1.denominator * f2.numerator, f1.numeratorSqr * f2.denominatorSqr, f1.denominatorSqr * f2.numeratorSqr);
     }
 
+    //TODO
+    // public static Fraction sqrFraction(Fraction f){
+    //     int tmpNum, tmpDen;
+
+    // }
+
     public void reduce(){
+        if((denominatorSqr == numeratorSqr) && denominatorSqr > 1){
+            numeratorSqr = 1;
+            denominatorSqr = 1;
+        }
+        if(denominatorSqr > 1){
+            numeratorSqr *= denominatorSqr;
+            denominator *= denominatorSqr;
+            denominatorSqr = 1;
+        }
+        if(numeratorSqr > 3){
+            int max = numeratorSqr;
+            for(int i = max; i > 3; i--){
+                if(numeratorSqr % i == 0){
+                    int tmp = (int)Math.sqrt(numeratorSqr);
+                    if(tmp * tmp == numeratorSqr){
+                        numerator *= tmp;
+                        numeratorSqr /= tmp;
+                    }
+                }
+            }
+        }
         for(int i = numerator < denominator ? numerator : denominator; i >= 2; i--){
             if(numerator % i == 0 && denominator % i == 0){
                 numerator /= i;
@@ -71,7 +113,15 @@ public class Fraction {
 
     @Override
     public String toString(){
-        return String.format("(%d/%d)", numerator, denominator);
+        String num = "" + numerator;
+        String den = "" + denominator;
+        if(numeratorSqr > 1){
+            num += "*\\" + numeratorSqr;
+        }
+        if(denominatorSqr > 1){
+            den += "*\\" + denominatorSqr;
+        }
+        return String.format("(%s/%s)", num, den);
     }
 
     @Override
@@ -86,11 +136,36 @@ public class Fraction {
         return this.numerator == p.numerator && this.denominator == p.denominator;
     }
 
+    
+    @Override
+    public int compareTo(Fraction o) {
+        if(this.denominator != o.denominator){
+            int currDenom = this.denominator;
+            int currSecondDenom = o.denominator;
+            this.denominator *= currSecondDenom;
+            this.numerator *= currSecondDenom;
+            o.denominator *= currDenom;
+            o.numerator *= currDenom;
+        }
+        int out = Integer.compare(this.numerator, o.numerator);
+        this.reduce();
+        o.reduce();
+        return out;
+    }
+
     public int getNumerator(){
         return numerator;
     }
 
     public int getDenominator(){
         return denominator;
+    }
+
+    public int getNumeratorSqr(){
+        return numeratorSqr;
+    }
+
+    public int getDenominatorSqr(){
+        return denominatorSqr;
     }
 }

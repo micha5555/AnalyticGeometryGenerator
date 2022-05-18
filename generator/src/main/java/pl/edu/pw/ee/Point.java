@@ -2,22 +2,28 @@ package pl.edu.pw.ee;
 
 import java.util.Random;
 
+import pl.edu.pw.ee.exceptions.IncorrectFractionException;
+
 public class Point {
-    private double x, y;
+    private Fraction x, y;
     public Point(){
         Random rand = new Random();
-        x = (rand.nextInt(48) - 24)/2;
-        y = (rand.nextInt(48) - 24)/2;
+        try {
+            x = new Fraction(rand.nextInt(48) - 24, 2);
+            y = new Fraction(rand.nextInt(48) - 24, 2);
+        } catch (IncorrectFractionException e) {
+            e.printStackTrace();
+        }
     }
 
-    public Point(double x, double y){
-        this.x = Common.rnd(x);
-        this.y = Common.rnd(y);
+    public Point(Fraction x, Fraction y){
+        this.x = x;
+        this.y = y;
     }
 
     @Override
     public String toString(){
-        return String.format("x=%.2f y=%.2f", x, y);
+        return String.format("x=%s y=%s", x.toString(), y.toString());
     }
 
     @Override
@@ -29,14 +35,14 @@ public class Point {
             return false;
         }
         Point p = (Point) o;
-        return (Double.compare(x, p.x) == 0) && (Double.compare(y, p.y) == 0);
+        return (x.equals(p.x) && y.equals(p.y));
     }
 
-    public double getX(){
+    public Fraction getX(){
         return x;
     }
 
-    public double getY(){
+    public Fraction getY(){
         return y;
     }
 
