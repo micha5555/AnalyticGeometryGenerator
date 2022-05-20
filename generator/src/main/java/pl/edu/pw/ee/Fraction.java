@@ -1,5 +1,6 @@
 package pl.edu.pw.ee;
 
+import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 
 public class Fraction implements Comparable<Fraction>{
@@ -60,17 +61,27 @@ public class Fraction implements Comparable<Fraction>{
         return new Fraction(f1.numerator * f2.numerator, f1.denominator * f2.denominator, f1.numeratorSqr * f2.numeratorSqr, f1.denominatorSqr *f2.denominatorSqr);
     }
 
-    public static Fraction divFractions(Fraction f1, Fraction f2) throws IncorrectFractionException{
+    public static Fraction divFractions(Fraction f1, Fraction f2) throws IncorrectFractionException, IllegalMathOperation{
+        if(f2.numerator == 0){
+            throw new IllegalMathOperation("Dividing by zero!");
+        }
         return new Fraction(f1.numerator * f2.denominator, f1.denominator * f2.numerator, f1.numeratorSqr * f2.denominatorSqr, f1.denominatorSqr * f2.numeratorSqr);
     }
 
     //TODO
-    // public static Fraction sqrFraction(Fraction f){
-    //     int tmpNum, tmpDen;
+    public static Fraction sqrFraction(Fraction f) throws IncorrectFractionException{
+        Fraction tmp = new Fraction(1, 1, f.numerator, f.denominator);
+        tmp.reduce();
+        return tmp;
+    }
 
-    // }
-
-    public void reduce(){
+    private void reduce(){
+        if(numerator == 0){
+            denominator = 1;
+            numeratorSqr = 1;
+            denominatorSqr = 1;
+            return;
+        }
         if((denominatorSqr == numeratorSqr) && denominatorSqr > 1){
             numeratorSqr = 1;
             denominatorSqr = 1;
@@ -84,10 +95,10 @@ public class Fraction implements Comparable<Fraction>{
             int max = numeratorSqr;
             for(int i = max; i > 3; i--){
                 if(numeratorSqr % i == 0){
-                    int tmp = (int)Math.sqrt(numeratorSqr);
-                    if(tmp * tmp == numeratorSqr){
+                    int tmp = (int)Math.sqrt(i);
+                    if(tmp * tmp == i){
                         numerator *= tmp;
-                        numeratorSqr /= tmp;
+                        numeratorSqr /= (tmp * tmp);
                     }
                 }
             }
@@ -116,12 +127,12 @@ public class Fraction implements Comparable<Fraction>{
         String num = "" + numerator;
         String den = "" + denominator;
         if(numeratorSqr > 1){
-            num += "*\\" + numeratorSqr;
+            num += "√" + numeratorSqr;
         }
         if(denominatorSqr > 1){
-            den += "*\\" + denominatorSqr;
+            den += "√" + denominatorSqr;
         }
-        return String.format("(%s/%s)", num, den);
+        return String.format("%s/%s", num, den);
     }
 
     @Override

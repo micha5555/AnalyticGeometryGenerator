@@ -2,6 +2,7 @@ package pl.edu.pw.ee;
 
 import java.util.Random;
 
+import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 import pl.edu.pw.ee.exceptions.SamePointsException;
 
@@ -42,36 +43,38 @@ public class Line {
     }
 
     public Func getFunc(){
-        Fraction a;
-        Fraction b = new Fraction(0, 1);
-        Fraction y = new Fraction(1, 1);
-        if(p1.getX().compareTo(p2.getX()) == 0){
-            a = new Fraction(1, 1);
-            b = p1.getX();
-            y = new Fraction(0, 1);
-        }
-        else if(p1.getY().compareTo(p2.getY()) == 0){
-            a = new Fraction(0, 1);
-            b = p1.getY();
-            y = new Fraction(1, 1);
-        }
-        else{
-            a = Fraction.divFractions(Fraction.subFractions(p2.getY(), p2.getY()), Fraction.subFractions(p2.getX(), p1.getX()));
-            // double[] firstEquation = {p1.getY(), p1.getX(), 1};
-            // double[] secondEquation = {p2.getY(), p2.getX(), 1};
-            // double tmpA = Common.rnd((firstEquation[0] - firstEquation[2])/firstEquation[1]);
-            // double[] tmpEquation = {secondEquation[0], secondEquation[1]*tmpA+1};
-            b = Fraction.subFractions(p1.getY(), Fraction.multiplyFractions(a, p1.getX()))
-        }
-        return new Func(y, a, b);
+    //     Fraction a;
+    //     Fraction b = new Fraction(0, 1);
+    //     Fraction y = new Fraction(1, 1);
+    //     if(p1.getX().compareTo(p2.getX()) == 0){
+    //         a = new Fraction(1, 1);
+    //         b = p1.getX();
+    //         y = new Fraction(0, 1);
+    //     }
+    //     else if(p1.getY().compareTo(p2.getY()) == 0){
+    //         a = new Fraction(0, 1);
+    //         b = p1.getY();
+    //         y = new Fraction(1, 1);
+    //     }
+    //     else{
+    //         a = Fraction.divFractions(Fraction.subFractions(p2.getY(), p2.getY()), Fraction.subFractions(p2.getX(), p1.getX()));
+    //         // double[] firstEquation = {p1.getY(), p1.getX(), 1};
+    //         // double[] secondEquation = {p2.getY(), p2.getX(), 1};
+    //         // double tmpA = Common.rnd((firstEquation[0] - firstEquation[2])/firstEquation[1]);
+    //         // double[] tmpEquation = {secondEquation[0], secondEquation[1]*tmpA+1};
+    //         b = Fraction.subFractions(p1.getY(), Fraction.multiplyFractions(a, p1.getX()));
+    //     }
+    //     return new Func(y, a, b);
+    //TODO: usunać
+        return null;
     }
 
-    public double getLength(){
-        double output = Math.sqrt(Math.pow(Fraction.subFractions(p2.getX(), p1.getX()), 2) + Math.pow(Fraction.subFractions(p2.getY(), p1.getY()), 2));
-        return Common.rnd(output);
-    }
+    // public double getLength(){
+    //     double output = Math.sqrt(Math.pow(Fraction.subFractions(p2.getX(), p1.getX()), 2) + Math.pow(Fraction.subFractions(p2.getY(), p1.getY()), 2));
+    //     return Common.rnd(output);
+    // }
 
-    public Point getCenter() throws IncorrectFractionException{
+    public Point getCenter() throws IncorrectFractionException, IllegalMathOperation{
         return new Point(Fraction.divFractions(Fraction.addFractions(p1.getX(), p2.getX()), new Fraction(2, 1)), Fraction.divFractions(Fraction.addFractions(p1.getY(), p2.getY()), new Fraction(2, 1)));
     }
 
@@ -108,7 +111,7 @@ public class Line {
     }
 
     //TODO: poprawic jakby y=0
-    public Func getSymmetrical() throws IncorrectFractionException{
+    public Func getSymmetrical() throws IncorrectFractionException, IllegalMathOperation{
         Fraction y = new Fraction(1, 1); //popr
         Fraction secondA = new Fraction(1, 1);
         Point center = this.getCenter();
@@ -131,7 +134,7 @@ public class Line {
     }
 
     //TODO: nie działa
-    public Line createParallelLine() throws SamePointsException, IncorrectFractionException{
+    public Line createParallelLine() throws SamePointsException, IncorrectFractionException, IllegalMathOperation{
         Random rand = new Random();
         Fraction primP1x = p1.getX();
         Fraction primP1y = p1.getY();
