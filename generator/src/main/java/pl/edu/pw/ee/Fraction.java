@@ -44,7 +44,7 @@ public class Fraction implements Comparable<Fraction>{
             f1 = tmp[0];
             f2 = tmp[1];
         }
-        return new Fraction(f1.numerator + f2.numerator, f1.denominator);
+        return new Fraction(f1.numerator + f2.numerator, f1.denominator, f1.numeratorSqr, f1.denominatorSqr);
     }
 
     //dwa ułamki bo pierwiastki mogąbyć różne?
