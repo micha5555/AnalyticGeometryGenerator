@@ -6,7 +6,7 @@ import pl.edu.pw.ee.exceptions.NotIsoscelesTriangle;
 import pl.edu.pw.ee.exceptions.SamePointsException;
 
 //TODO define exception
-public class IsoscelesTriangle extends Triangle{
+//
     // public IsoscelesTriangle(Point a, Point b, Point c) throws NotIsoscelesTriangle, SamePointsException{
     //     super(a, b, c);
     //     Line ab = new Line(a, b);
@@ -16,4 +16,4 @@ public class IsoscelesTriangle extends Triangle{
     //         throw new NotIsoscelesTriangle("Triangle is not isosceles!");
     //     }
     // }
-}
+//

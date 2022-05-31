@@ -1,25 +1,44 @@
 package pl.edu.pw.ee;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 
 public class Point {
-    private Fraction x, y;
+    private FractionAggregation x, y;
     public Point(){
         Random rand = new Random();
         try {
-            x = new Fraction(rand.nextInt(48) - 24, 2);
-            y = new Fraction(rand.nextInt(48) - 24, 2);
+            x = new FractionAggregation(new Fraction(rand.nextInt(48) - 24, 2));
+            y = new FractionAggregation(new Fraction(rand.nextInt(48) - 24, 2));
         } catch (IncorrectFractionException e) {
             e.printStackTrace();
         }
     }
 
     public Point(Fraction x, Fraction y){
+        this(new FractionAggregation(x), new FractionAggregation(y));
+    }
+
+    public Point(FractionAggregation x, FractionAggregation y){
         this.x = x;
         this.y = y;
     }
+
+    public Point(int x, int y) throws IncorrectFractionException{
+        this.x = new FractionAggregation(new Fraction(x, 1));
+        this.y = new FractionAggregation(new Fraction(y, 1));
+    }
+
+    public Point(Fraction x, int y) throws IncorrectFractionException{
+        this(x, new Fraction(y, 1));
+    }
+
+    public Point(int x, Fraction y) throws IncorrectFractionException{
+        this(new Fraction(x, 1), y);
+    }
+
 
     @Override
     public String toString(){
@@ -38,12 +57,16 @@ public class Point {
         return (x.equals(p.x) && y.equals(p.y));
     }
 
-    public Fraction getX(){
-        return x;
+    public FractionAggregation getX(){
+        ArrayList<Fraction> tmp = new ArrayList<>();
+        tmp.addAll(x.getList());
+        return new FractionAggregation(tmp);
     }
 
-    public Fraction getY(){
-        return y;
+    public FractionAggregation getY(){
+        ArrayList<Fraction> tmp = new ArrayList<>();
+        tmp.addAll(y.getList());
+        return new FractionAggregation(tmp);
     }
 
 }

@@ -37,24 +37,23 @@ public class Fraction implements Comparable<Fraction>{
         }
     }
 
+    //TODO Nie dodawać/odejmować, gdy różne pierwiastki
     //dwaa ułamki bo pierwiastki mogą byc różne?
     public static Fraction addFractions(Fraction f1, Fraction f2) throws IncorrectFractionException{
         if(f1.denominator != f2.denominator){
             Fraction[] tmp = makeCommonDenominator(f1, f2);
-            f1 = tmp[0];
-            f2 = tmp[1];
+            return new Fraction(tmp[0].numerator + tmp[1].numerator, tmp[0].denominator, tmp[0].numeratorSqr, tmp[0].denominatorSqr);
         }
         return new Fraction(f1.numerator + f2.numerator, f1.denominator, f1.numeratorSqr, f1.denominatorSqr);
     }
 
-    //dwa ułamki bo pierwiastki mogąbyć różne?
+    //dwa ułamki bo pierwiastki mogą być różne?
     public static Fraction subFractions(Fraction f1, Fraction f2) throws IncorrectFractionException{
         if(f1.denominator != f2.denominator){
             Fraction[] tmp = makeCommonDenominator(f1, f2);
-            f1 = tmp[0];
-            f2 = tmp[1];
+            return new Fraction(tmp[0].numerator - tmp[1].numerator, tmp[0].denominator, tmp[0].numeratorSqr, tmp[0].denominatorSqr);
         }
-        return new Fraction(f1.numerator - f2.numerator, f1.denominator);
+        return new Fraction(f1.numerator - f2.numerator, f1.denominator, f1.numeratorSqr, f1.denominatorSqr);
     }
 
     public static Fraction multiplyFractions(Fraction f1, Fraction f2) throws IncorrectFractionException{
@@ -69,13 +68,19 @@ public class Fraction implements Comparable<Fraction>{
     }
 
     //TODO
+    //Aktualnie dziala dla punktow wejciowych bez pierwiastkow
     public static Fraction sqrFraction(Fraction f) throws IncorrectFractionException{
         Fraction tmp = new Fraction(1, 1, f.numerator, f.denominator);
         tmp.reduce();
         return tmp;
     }
 
-    private void reduce(){
+    public static Fraction powFraction(Fraction f) throws IncorrectFractionException{
+        f = new Fraction(f.numeratorSqr * f.numeratorSqr * f.numerator * f.numerator, f.denominatorSqr * f.denominatorSqr * f.denominator * f.denominator);
+        return f;
+    }
+
+    public void reduce(){
         if(numerator == 0){
             denominator = 1;
             numeratorSqr = 1;
@@ -103,7 +108,8 @@ public class Fraction implements Comparable<Fraction>{
                 }
             }
         }
-        for(int i = numerator < denominator ? numerator : denominator; i >= 2; i--){
+        int i = numerator < denominator ? numerator : denominator;
+        for(i = Math.abs(i); i >= 2; i--){
             if(numerator % i == 0 && denominator % i == 0){
                 numerator /= i;
                 denominator /= i;
@@ -112,14 +118,19 @@ public class Fraction implements Comparable<Fraction>{
         }
     }
 
-    public static Fraction[] makeCommonDenominator(Fraction f1, Fraction f2){
-        int denominatorOfF1 = f1.denominator;
-        int denominatorOfF2 = f2.denominator;
-        f1.numerator *= denominatorOfF2;
-        f1.denominator *= denominatorOfF2;
-        f2.numerator *= denominatorOfF1;
-        f2.denominator *= denominatorOfF1;
-        return new Fraction[]{f1, f2};
+    public static Fraction[] makeCommonDenominator(Fraction f1, Fraction f2) throws IncorrectFractionException {
+        Fraction[] out = new Fraction[2];
+        Fraction f1Copy = new Fraction(f1.numerator, f1.denominator, f1.numeratorSqr, f1.denominatorSqr);
+        Fraction f2Copy = new Fraction(f2.numerator, f2.denominator, f2.numeratorSqr, f2.denominatorSqr);
+        int denominatorOfF1 = f1Copy.denominator;
+        int denominatorOfF2 = f2Copy.denominator;
+        f1Copy.numerator *= denominatorOfF2;
+        f1Copy.denominator *= denominatorOfF2;
+        f2Copy.numerator *= denominatorOfF1;
+        f2Copy.denominator *= denominatorOfF1;
+        out[0] = f1Copy;
+        out[1] = f2Copy;
+        return out;
     }
 
     @Override
@@ -144,7 +155,7 @@ public class Fraction implements Comparable<Fraction>{
             return false;
         }
         Fraction p = (Fraction) o;
-        return this.numerator == p.numerator && this.denominator == p.denominator;
+        return this.numerator == p.numerator && this.denominator == p.denominator && this.numeratorSqr == p.numeratorSqr && this.denominatorSqr == p.denominatorSqr;
     }
 
     

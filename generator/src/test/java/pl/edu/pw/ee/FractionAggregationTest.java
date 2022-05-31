@@ -144,4 +144,64 @@ public class FractionAggregationTest extends FractionTestCommon{
         checkFraction(result.getFraction(1), -3, 88, 3, 1);
         checkFraction(result.getFraction(2), 3, 4, 5, 1);
     }
+
+    @Test
+    public void should_EqualsReturnTrue_WhenAggregatinosAreTheSame_AndHaveOnlyOneElem() throws IncorrectFractionException{
+        ArrayList<Fraction> list1 = new ArrayList<>();
+        ArrayList<Fraction> list2 = new ArrayList<>();
+        list1.add(new Fraction(5, 3, 3,1));
+        list2.add(new Fraction(5,3,3,1));
+        FractionAggregation f1 = new FractionAggregation(list1);
+        FractionAggregation f2 = new FractionAggregation(list2);
+        assertTrue(f1.equals(f2));
+    }
+
+    @Test
+    public void should_EqualsReturnFalse_WhenAggregatinosArentTheSame_AndHaveOnlyOneElem() throws IncorrectFractionException{
+        ArrayList<Fraction> list1 = new ArrayList<>();
+        ArrayList<Fraction> list2 = new ArrayList<>();
+        list1.add(new Fraction(5, 3, 3,1));
+        list2.add(new Fraction(5,3,2,1));
+        FractionAggregation f1 = new FractionAggregation(list1);
+        FractionAggregation f2 = new FractionAggregation(list2);
+        assertTrue(!f1.equals(f2));
+    }
+
+    @Test
+    public void should_EqualsReturnFalse_WhenAggregationsHaveDifferentSizes() throws IncorrectFractionException{
+        ArrayList<Fraction> list1 = new ArrayList<>();
+        ArrayList<Fraction> list2 = new ArrayList<>();
+        list1.add(new Fraction(5, 3, 3,1));
+        list2.add(new Fraction(5,3,2,1));
+        list2.add(new Fraction(4, 1));
+        FractionAggregation f1 = new FractionAggregation(list1);
+        FractionAggregation f2 = new FractionAggregation(list2);
+        assertTrue(!f1.equals(f2));
+    }
+
+    @Test
+    public void should_EqualsReturnTrue_WhenAggregationsAreTheSame_AndHaveTwoElems() throws IncorrectFractionException{
+        ArrayList<Fraction> list1 = new ArrayList<>();
+        ArrayList<Fraction> list2 = new ArrayList<>();
+        list1.add(new Fraction(5, 3, 3,1));
+        list1.add(new Fraction(4, 1));
+        list2.add(new Fraction(4, 1));
+        list2.add(new Fraction(5,3,3,1));
+        FractionAggregation f1 = new FractionAggregation(list1);
+        FractionAggregation f2 = new FractionAggregation(list2);
+        assertTrue(f1.equals(f2));
+    }
+
+    @Test
+    public void should_EqualsReturnFalse_WhenAggregationsAreNotTheSame_AndHaveTwoElems() throws IncorrectFractionException{
+        ArrayList<Fraction> list1 = new ArrayList<>();
+        ArrayList<Fraction> list2 = new ArrayList<>();
+        list1.add(new Fraction(5, 2, 3,1));
+        list1.add(new Fraction(4, 1));
+        list2.add(new Fraction(4, 1));
+        list2.add(new Fraction(5,3,3,1));
+        FractionAggregation f1 = new FractionAggregation(list1);
+        FractionAggregation f2 = new FractionAggregation(list2);
+        assertTrue(!f1.equals(f2));
+    }
 }

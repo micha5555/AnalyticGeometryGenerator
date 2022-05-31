@@ -10,6 +10,9 @@ public class FractionAggregation {
     private ArrayList<Fraction> fractions = new ArrayList<>();
 
     public FractionAggregation(ArrayList<Fraction> fractions){
+        for(Fraction fraction : fractions){
+            fraction.reduce();
+        }
         try {
             this.fractions = addInternally(fractions);
         } catch (IncorrectFractionException e) {
@@ -19,44 +22,84 @@ public class FractionAggregation {
     }
 
     public FractionAggregation(Fraction fraction){
+        fraction.reduce();
         this.fractions.add(fraction);
     }
 
     public static FractionAggregation addFA(FractionAggregation f1, FractionAggregation f2) throws IncorrectFractionException{
+        ArrayList<Fraction> f1CopyList = new ArrayList<>();
+        ArrayList<Fraction> f2CopyList = new ArrayList<>();
+        f1CopyList.addAll(f1.getList());
+        f2CopyList.addAll(f2.getList());
+        FractionAggregation f1Copy = new FractionAggregation(f1CopyList);
+        FractionAggregation f2Copy = new FractionAggregation(f2CopyList);
         ArrayList<Fraction> result = new ArrayList<>();
-        for(int i = 0; i < f1.getSize(); i++){
-            Fraction tmp = f1.getFraction(i);
-            for(int j = 0; j < f2.getSize(); j++){
-                if(f2.getFraction(j).getNumeratorSqr() == tmp.getNumeratorSqr()){
-                    tmp = Fraction.addFractions(tmp, f2.getFraction(j));
-                    f2.removeFraction(j);
+        for(int i = 0; i < f1Copy.getSize(); i++){
+            Fraction tmp = f1Copy.getFraction(i);
+            for(int j = 0; j < f2Copy.getSize(); j++){
+                if(f2Copy.getFraction(j).getNumeratorSqr() == tmp.getNumeratorSqr()){
+                    tmp = Fraction.addFractions(tmp, f2Copy.getFraction(j));
+                    f2Copy.removeFraction(j);
                     j--;
                 }
             }
+            tmp.reduce();
             result.add(tmp);
         }
-        for(int i = 0; i < f2.getSize(); i++){
-            result.add(f2.getFraction(i));
+        for(int i = 0; i < f2Copy.getSize(); i++){
+            f2Copy.getFraction(i).reduce();
+            result.add(f2Copy.getFraction(i));
         }
         return new FractionAggregation(result);
+    }
+
+    public static FractionAggregation addFA(Fraction f1, Fraction f2) throws IncorrectFractionException{
+        return FractionAggregation.addFA(new FractionAggregation(f1), new FractionAggregation(f2));
+    }
+
+    public static FractionAggregation addFA(Fraction f1, FractionAggregation f2) throws IncorrectFractionException{
+        return FractionAggregation.addFA(new FractionAggregation(f1), f2);
+    }
+
+    public static FractionAggregation addFA(FractionAggregation f1, Fraction f2) throws IncorrectFractionException{
+        return FractionAggregation.addFA(f1, new FractionAggregation(f2));
     }
 
     public static FractionAggregation subFA(FractionAggregation f1, FractionAggregation f2) throws IncorrectFractionException{
+        ArrayList<Fraction> f1CopyList = new ArrayList<>();
+        ArrayList<Fraction> f2CopyList = new ArrayList<>();
+        f1CopyList.addAll(f1.getList());
+        f2CopyList.addAll(f2.getList());
+        FractionAggregation f1Copy = new FractionAggregation(f1CopyList);
+        FractionAggregation f2Copy = new FractionAggregation(f2CopyList);
         ArrayList<Fraction> result = new ArrayList<>();
-        for(int i = 0; i < f1.getSize(); i++){
-            Fraction tmp = f1.getFraction(i);
-            for(int j = 0; j < f2.getSize(); j++){
-                if(f2.getFraction(j).getNumeratorSqr() == tmp.getNumeratorSqr()){
-                    tmp = Fraction.subFractions(tmp, f2.getFraction(j));
-                    f2.removeFraction(j);
+        for(int i = 0; i < f1Copy.getSize(); i++){
+            Fraction tmp = f1Copy.getFraction(i);
+            for(int j = 0; j < f2Copy.getSize(); j++){
+                if(f2Copy.getFraction(j).getNumeratorSqr() == tmp.getNumeratorSqr()){
+                    //TU WYWALA!
+                    tmp = Fraction.subFractions(tmp, f2Copy.getFraction(j));
+                    f2Copy.removeFraction(j);
                     j--;
                 }
             }
+            tmp.reduce();
             result.add(tmp);
         }
         return new FractionAggregation(result);
     }
 
+    public static FractionAggregation subFA(Fraction f1, Fraction f2) throws IncorrectFractionException{
+        return FractionAggregation.subFA(new FractionAggregation(f1), new FractionAggregation(f2));
+    }
+
+    public static FractionAggregation subFA(Fraction f1, FractionAggregation f2) throws IncorrectFractionException{
+        return FractionAggregation.subFA(new FractionAggregation(f1), f2);
+    }
+
+    public static FractionAggregation subFA(FractionAggregation f1, Fraction f2) throws IncorrectFractionException{
+        return FractionAggregation.subFA(f1, new FractionAggregation(f2));
+    }
     public static FractionAggregation multiplyFA(FractionAggregation f1, FractionAggregation f2) throws IncorrectFractionException{
         ArrayList<Fraction> multiplied = new ArrayList<>();
         for(int i = 0; i < f1.getSize(); i++){
@@ -67,9 +110,20 @@ public class FractionAggregation {
         return new FractionAggregation(addInternally(multiplied));
     }
 
+    public static FractionAggregation multiplyFA(Fraction f1, Fraction f2) throws IncorrectFractionException{
+        return FractionAggregation.multiplyFA(new FractionAggregation(f1), new FractionAggregation(f2));
+    }
+
+    public static FractionAggregation multiplyFA(Fraction f1, FractionAggregation f2) throws IncorrectFractionException{
+        return FractionAggregation.multiplyFA(new FractionAggregation(f1), f2);
+    }
+
+    public static FractionAggregation multiplyFA(FractionAggregation f1, Fraction f2) throws IncorrectFractionException{
+        return FractionAggregation.multiplyFA(f1, new FractionAggregation(f2));
+    }
+
     //Actually works if denominator have two numbers. I think that`s enough
     public static FractionAggregation divideFA(FractionAggregation f1, FractionAggregation f2) throws IncorrectFractionException, IllegalMathOperation{
-        FractionAggregation result = null;
         if(f2.getSize() > 2){
             throw new IllegalArgumentException("App actually doesn`t support dividing by 3 numbers");
         }
@@ -82,10 +136,25 @@ public class FractionAggregation {
         f1 = new FractionAggregation(addInternally(f1.getList()));
         ArrayList<Fraction> tmp = new ArrayList<>();
         for(int i = 0; i < f1.getSize(); i++){
-            tmp.add(Fraction.divFractions(f1.getFraction(i), f2.getFraction(0)));
+            Fraction toAdd = Fraction.divFractions(f1.getFraction(i), f2.getFraction(0));
+            toAdd.reduce();
+            tmp.add(toAdd);
+            
         }
-        f2 = new FractionAggregation(addInternally(f2.getList()));
-        return f2;
+        FractionAggregation out = new FractionAggregation(addInternally(tmp));
+        return out;
+    }
+
+    public static FractionAggregation divideFA(Fraction f1, Fraction f2) throws IncorrectFractionException, IllegalMathOperation{
+        return FractionAggregation.divideFA(new FractionAggregation(f1), new FractionAggregation(f2));
+    }
+
+    public static FractionAggregation divideFA(Fraction f1, FractionAggregation f2) throws IncorrectFractionException, IllegalMathOperation{
+        return FractionAggregation.divideFA(new FractionAggregation(f1), f2);
+    }
+
+    public static FractionAggregation divideFA(FractionAggregation f1, Fraction f2) throws IncorrectFractionException, IllegalMathOperation{
+        return FractionAggregation.divideFA(f1, new FractionAggregation(f2));
     }
 
     private void deleteZeroIfNeeded(){
@@ -140,6 +209,47 @@ public class FractionAggregation {
         return out;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+        if(!(o instanceof FractionAggregation)){
+            return false;
+        }
+        FractionAggregation p = (FractionAggregation) o;
+        int size1 = this.fractions.size();
+        int size2 = p.fractions.size();
+        if(size1 != size2){
+            return false;
+        }
+        int cnt = 0;
+        for(int i = 0; i < size1; i++){
+            for(int j = 0; j < size1; j++){
+                if(this.fractions.get(i).equals(p.fractions.get(j))){
+                    cnt ++;
+                    break;
+                }
+            }
+        }
+        return cnt == size1;
+    }
+
+    public int compareTo(FractionAggregation tocmp){
+        double firstSum = 0;
+        double tocmpSum = 0;
+        Fraction tmp;
+        for(int i = 0; i < this.getSize(); i++){
+            tmp = this.getFraction(i);
+            firstSum += (tmp.getNumerator() * Math.sqrt(tmp.getNumeratorSqr())) / (tmp.getDenominator() * Math.sqrt(tmp.getDenominatorSqr()));
+        }
+        for(int i = 0; i < tocmp.getSize(); i++){
+            tmp = tocmp.getFraction(i);
+            tocmpSum += (tmp.getNumerator() * Math.sqrt(tmp.getNumeratorSqr())) / (tmp.getDenominator() * Math.sqrt(tmp.getDenominatorSqr()));
+        }
+        return Double.compare(firstSum, tocmpSum);
+    }
+
     public int getSize(){
         return fractions.size();
     }
@@ -154,5 +264,19 @@ public class FractionAggregation {
 
     public ArrayList<Fraction> getList(){
         return fractions;
+    }
+
+    public void abs() throws IncorrectFractionException{
+        ArrayList<Fraction> tmp = new ArrayList<>();
+        for(int i = 0; i < this.getSize(); i++){
+            Fraction actual = this.getFraction(i);
+            if(actual.getNumerator() >= 0){
+                tmp.add(actual);
+            }
+            else{
+                Fraction absFract = new Fraction(-actual.getNumerator(), actual.getDenominator(), actual.getNumeratorSqr(), actual.getDenominatorSqr());
+            }
+        }
+        this.fractions = tmp;
     }
 }
