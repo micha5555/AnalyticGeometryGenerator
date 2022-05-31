@@ -204,4 +204,11 @@ public class FractionAggregationTest extends FractionTestCommon{
         FractionAggregation f2 = new FractionAggregation(list2);
         assertTrue(!f1.equals(f2));
     }
+
+    @Test
+    public void should_AbsReturnProperly_WhenThereIsOnlyOneFraction() throws IncorrectFractionException{
+        FractionAggregation f = new FractionAggregation(new Fraction(-2, 3));
+        f.abs();
+        assertTrue(f.equals(new FractionAggregation(new Fraction(2, 3))));
+    }
 }

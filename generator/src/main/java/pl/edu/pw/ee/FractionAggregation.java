@@ -255,7 +255,14 @@ public class FractionAggregation {
     }
 
     public Fraction getFraction(int index){
-        return fractions.get(index);
+        Fraction toCopy = fractions.get(index);
+        try {
+            return new Fraction(toCopy.getNumerator(), toCopy.getDenominator(), toCopy.getNumeratorSqr(), toCopy.getDenominatorSqr());
+        } catch (IncorrectFractionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void removeFraction(int index){
@@ -275,6 +282,7 @@ public class FractionAggregation {
             }
             else{
                 Fraction absFract = new Fraction(-actual.getNumerator(), actual.getDenominator(), actual.getNumeratorSqr(), actual.getDenominatorSqr());
+                tmp.add(absFract);
             }
         }
         this.fractions = tmp;
