@@ -86,7 +86,6 @@ public class TriangleTest extends TriangleTestCommon{
         FractionAggregation hAExpected = new FractionAggregation(new Fraction(12, 5));
         FractionAggregation hBExpected = new FractionAggregation(new Fraction(8, 1));
         FractionAggregation hCExpected = new FractionAggregation(new Fraction(24, 73, 73, 1));
-        System.out.println(t.getSideAB().getLength().toString());
         this.checkHeights(t, hAExpected, hBExpected, hCExpected);
     }
 
