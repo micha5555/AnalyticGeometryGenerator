@@ -11,8 +11,6 @@ public class Triangle implements Figure{
 
     public Triangle() throws SamePointsException{
         a = new Point();
-        b = new Point();
-        c = new Point();
         do{
             b = new Point();
         }while(a.equals(b));
@@ -105,6 +103,7 @@ public class Triangle implements Figure{
     public Point getC(){
         return c;
     }
+    
     private void assignSides() throws SamePointsException{
         sideAB = new Line(a, b);
         sideBC = new Line(b, c);

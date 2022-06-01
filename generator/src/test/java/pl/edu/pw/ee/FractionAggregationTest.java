@@ -207,8 +207,131 @@ public class FractionAggregationTest extends FractionTestCommon{
 
     @Test
     public void should_AbsReturnProperly_WhenThereIsOnlyOneFraction() throws IncorrectFractionException{
-        FractionAggregation f = new FractionAggregation(new Fraction(-2, 3));
+        FractionAggregation f = new FractionAggregation(new Fraction(-2, 3, 3, 1));
         f.abs();
-        assertTrue(f.equals(new FractionAggregation(new Fraction(2, 3))));
+        assertTrue(f.equals(new FractionAggregation(new Fraction(2, 3, 3, 1))));
+        f.abs();
+        assertTrue(f.equals(new FractionAggregation(new Fraction(2, 3, 3, 1))));
+    }
+
+    @Test
+    public void should_AbsReturnProperly_WhenThereIsTwoFractions_AndBothAreNegative() throws IncorrectFractionException{
+        ArrayList<Fraction> fl = new ArrayList<>();
+        fl.add(new Fraction(-3, 4, 2, 1));
+        fl.add(new Fraction(-5, 2, 3, 1));
+        FractionAggregation f = new FractionAggregation(fl);
+        f.abs();
+        ArrayList<Fraction> fl2 = new ArrayList<>();
+        fl2.add(new Fraction(5,2,3,1));
+        fl2.add(new Fraction(3,4,2,1));
+        FractionAggregation shouldBe = new FractionAggregation(fl2);
+        assertTrue(f.equals(shouldBe));
+        f.abs();
+        assertTrue(f.equals(shouldBe));
+    }
+
+    @Test
+    public void should_AbsReturnProperly_WhenThereIsTwoFractions_AndOneIsNegative() throws IncorrectFractionException{
+        ArrayList<Fraction> fl = new ArrayList<>();
+        fl.add(new Fraction(3, 4, 2, 1));
+        fl.add(new Fraction(-5, 2, 3, 1));
+        FractionAggregation f = new FractionAggregation(fl);
+        f.abs();
+        ArrayList<Fraction> fl2 = new ArrayList<>();
+        fl2.add(new Fraction(5,2,3,1));
+        fl2.add(new Fraction(3,4,2,1));
+        FractionAggregation shouldBe = new FractionAggregation(fl2);
+        assertTrue(f.equals(shouldBe));
+        f.abs();
+        assertTrue(f.equals(shouldBe));
+    }
+
+    @Test
+    public void should_AbsReturnProperly_WhenThereIsTwoFractions_AndBothArePositive() throws IncorrectFractionException{
+        ArrayList<Fraction> fl = new ArrayList<>();
+        fl.add(new Fraction(3, 4, 2, 1));
+        fl.add(new Fraction(5, 2, 3, 1));
+        FractionAggregation f = new FractionAggregation(fl);
+        f.abs();
+        ArrayList<Fraction> fl2 = new ArrayList<>();
+        fl2.add(new Fraction(5,2,3,1));
+        fl2.add(new Fraction(3,4,2,1));
+        FractionAggregation shouldBe = new FractionAggregation(fl2);
+        assertTrue(f.equals(shouldBe));
+        f.abs();
+        assertTrue(f.equals(shouldBe));
+    }
+
+    @Test
+    public void should_CompareToReturn1_WhenFirstIsBigger_AndBothHavOneFraction() throws IncorrectFractionException{
+        Fraction f1 = new Fraction(5, 2, 2, 1);
+        Fraction f2 = new Fraction(5, 2, 1, 1);
+        Fraction f3 = new Fraction(-5, 2, 3, 1);
+        FractionAggregation fa1 = new FractionAggregation(f1);
+        FractionAggregation fa2 = new FractionAggregation(f2);
+        FractionAggregation fa3 = new FractionAggregation(f3);
+        assertTrue(fa1.compareTo(fa2) == 1);
+        assertTrue(fa1.compareTo(fa3) == 1);
+    }   
+
+    @Test
+    public void should_CompareToReturnMinus1_WhenFirstIsSmaller_AndBothHavOneFraction() throws IncorrectFractionException{
+            Fraction f1 = new Fraction(5, 2, 2, 1);
+            Fraction f2 = new Fraction(5, 2, 1, 1);
+            Fraction f3 = new Fraction(-5, 2, 3, 1);
+            FractionAggregation fa1 = new FractionAggregation(f1);
+            FractionAggregation fa2 = new FractionAggregation(f2);
+            FractionAggregation fa3 = new FractionAggregation(f3);
+            assertTrue(fa2.compareTo(fa1) == -1);
+            assertTrue(fa3.compareTo(fa1) == -1);
+    }
+
+    @Test
+    public void should_CompareToReturnZero_WhenBothAreTheSame_AndHaveOneFraction() throws IncorrectFractionException{
+        Fraction f1 = new Fraction(5,4,3,1);
+        Fraction f2 = new Fraction(5,4,3,1);
+        FractionAggregation fa1 = new FractionAggregation(f1);
+        FractionAggregation fa2 = new FractionAggregation(f2);
+        assertTrue(fa1.compareTo(fa2) == 0);
+    }
+
+    @Test
+    public void should_CompareToReturnCorrectly_WhenBothHaveTwoElems() throws IncorrectFractionException{
+        Fraction f1 = new Fraction(3,4,3,1);
+        Fraction f2 = new Fraction(1,2);
+        Fraction f3 = new Fraction(3,4);
+        Fraction f4 = new Fraction(1,2,7,1);
+        FractionAggregation fa1 = new FractionAggregation();
+        FractionAggregation fa2 = new FractionAggregation();
+        fa1.addFraction(f1);
+        fa1.addFraction(f2);
+        fa2.addFraction(f3);
+        fa2.addFraction(f4);
+        assertTrue(fa1.compareTo(fa2) == -1);
+        fa1.clear();
+        fa2.clear();
+        fa1.addFraction(f2);
+        fa1.addFraction(f3);
+        fa2.addFraction(f1);
+        fa2.addFraction(f4);
+        assertTrue(fa2.compareTo(fa1) == 1);
+        fa1.clear();
+        fa2.clear();
+        fa1.addFraction(f1);
+        fa1.addFraction(f2);
+        fa2.addFraction(f1);
+        fa2.addFraction(f2);
+        assertTrue(fa1.compareTo(fa2) == 0);
+    }
+
+    @Test
+    public void should_CompareToReturnCorrectly_WhenOneHasOneFractions_AndSecondHasTwoFractions() throws IncorrectFractionException{
+        Fraction f1 = new Fraction(1,2, 2, 1);
+        Fraction f2 = new Fraction(3,4);
+        Fraction f3 = new Fraction(1,4);
+        FractionAggregation fa1 = new FractionAggregation(f1);
+        fa1.addFraction(f3);
+        FractionAggregation fa2 = new FractionAggregation(f2);
+        assertTrue(fa1.compareTo(fa2) == 1);
     }
 }

@@ -9,6 +9,10 @@ import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 public class FractionAggregation {
     private ArrayList<Fraction> fractions = new ArrayList<>();
 
+    public FractionAggregation(){
+
+    }
+
     public FractionAggregation(ArrayList<Fraction> fractions){
         for(Fraction fraction : fractions){
             fraction.reduce();
@@ -267,6 +271,14 @@ public class FractionAggregation {
 
     public void removeFraction(int index){
         fractions.remove(index);
+    }
+
+    public void addFraction(Fraction f){
+        fractions.add(f);
+    }
+
+    public void clear(){
+        fractions = new ArrayList<>();
     }
 
     public ArrayList<Fraction> getList(){

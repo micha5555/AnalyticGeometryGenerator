@@ -76,7 +76,7 @@ public class Fraction implements Comparable<Fraction>{
     }
 
     public static Fraction powFraction(Fraction f) throws IncorrectFractionException{
-        f = new Fraction(f.numeratorSqr * f.numeratorSqr * f.numerator * f.numerator, f.denominatorSqr * f.denominatorSqr * f.denominator * f.denominator);
+        f = new Fraction(f.numeratorSqr * f.numerator * f.numerator, f.denominatorSqr * f.denominator * f.denominator);
         return f;
     }
 
