@@ -90,6 +90,10 @@ public class FractionAggregation {
             tmp.reduce();
             result.add(tmp);
         }
+        for(int i = 0; i < f2Copy.getSize(); i++){
+            Fraction t = f2Copy.getFraction(i);
+            result.add(new Fraction(-t.getNumerator(), t.getDenominator(), t.getNumeratorSqr(), t.getDenominatorSqr()));
+        }
         return new FractionAggregation(result);
     }
 
@@ -273,8 +277,10 @@ public class FractionAggregation {
         fractions.remove(index);
     }
 
-    public void addFraction(Fraction f){
+    public void addFraction(Fraction f) throws IncorrectFractionException{
         fractions.add(f);
+        fractions = addInternally(fractions);
+        deleteZeroIfNeeded();
     }
 
     public void clear(){
