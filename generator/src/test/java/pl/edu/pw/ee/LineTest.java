@@ -175,6 +175,32 @@ public class LineTest extends LineTestCommon
             assertTrue(l.checkPerpendicularity(l2));
         }
     }
+
+    @Test
+    public void should_CorrectlyCountTangent_WhenLinesAreNormal() throws SamePointsException, IncorrectFractionException, IllegalMathOperation{
+        Line l1 = new Line(new Point(3, -2), new Point(2, 5));
+        Line l2 = new Line(new Point(-3, -3), new Point(5, 4));
+        FractionAggregation expTan = new FractionAggregation(new Fraction(63, 41));
+        FractionAggregation actualTan = l1.getTangentOfAcuteAngleWithSecondLine(l2);
+        assertEquals(expTan, actualTan);
+    }
+
+    @Test
+    public void should_CountTanReturnZero_WhenLinesAreParrarel() throws SamePointsException, IncorrectFractionException, IllegalMathOperation{
+        Line l1 = new Line(new Point(1, 1), new Point(3, 3));
+        Line l2 = new Line(new Point(-5, -5), new Point(2, 2));
+        FractionAggregation expTan = new FractionAggregation(new Fraction(0, 1));
+        FractionAggregation actualTan = l1.getTangentOfAcuteAngleWithSecondLine(l2);
+        assertEquals(expTan, actualTan);
+    }
+
+    //COś tu jest źle
+    @Test(expected = IllegalMathOperation.class)
+    public void should_ThrowExceptionWhileCountingTangent_WhenLinesArePerdpendicular() throws SamePointsException, IncorrectFractionException, IllegalMathOperation{
+        Line l1 = new Line(new Point(1, 1), new Point(5, 5));
+        Line l2 = new Line(new Point(3, 3), new Point(8, -2));
+        FractionAggregation tan = l1.getTangentOfAcuteAngleWithSecondLine(l2);
+    }
     // @Test
     // public void ttt() throws SamePointsException{
     //     Line l = new Line(new Point(0, 3), new Point(0, 0));

@@ -252,6 +252,19 @@ public class Line {
         return null;
     }
 
+    public FractionAggregation getTangentOfAcuteAngleWithSecondLine(Line l) throws IncorrectFractionException, IllegalMathOperation{
+        Func funcThis = this.getFunc();
+        Func funcSecond = l.getFunc();
+        FractionAggregation aMultiply = FractionAggregation.multiplyFA(funcThis.getA(), funcSecond.getA());
+        if(aMultiply.equals(new FractionAggregation(new Fraction(-1, 1)))){
+            throw new IllegalMathOperation("Tangent of 90 degres doesn`t exist");
+        }
+        FractionAggregation aDiff = FractionAggregation.subFA(funcThis.getA(), funcSecond.getA());
+        FractionAggregation denominator = FractionAggregation.addFA(new FractionAggregation(new Fraction(1, 1)), aMultiply);
+        FractionAggregation out = FractionAggregation.divideFA(aDiff, denominator);
+        out.abs();
+        return out;
+    }
 
     //TODO: delete
     public void showFunc() throws IncorrectFractionException, IllegalMathOperation{
