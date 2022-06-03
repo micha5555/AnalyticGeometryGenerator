@@ -46,8 +46,28 @@ public class Circle implements Figure{
         PI = new FractionAggregation(new Fraction(314, 100));
     }
 
+    public Square createSquareOnCircle() throws IncorrectFractionException, IllegalMathOperation{
+        Point center = getCenter();
+        Point leftUp = new Point(FractionAggregation.subFA(center.getX(), r), FractionAggregation.addFA(center.getY(), r));
+        Point rightDown = new Point(FractionAggregation.addFA(center.getX(), r), FractionAggregation.subFA(center.getY(), r));
+        return new Square(leftUp, rightDown);
+    }
+
+    public Square createSquareInCircle() throws IncorrectFractionException, IllegalMathOperation{
+        Point center = getCenter();
+        FractionAggregation halfOfA = FractionAggregation.divideFA(getRadius(), new FractionAggregation(new Fraction(1, 1, 2, 1)));
+        Point leftUp = new Point(FractionAggregation.subFA(center.getX(), halfOfA), FractionAggregation.addFA(center.getY(), halfOfA));
+        Point rightDown = new Point(FractionAggregation.addFA(center.getX(), halfOfA), FractionAggregation.subFA(center.getY(), halfOfA));
+        return new Square(leftUp, rightDown);
+    }
+
+
     public Point getCenter(){
         return new Point(a, b);
+    }
+
+    public FractionAggregation getRadius(){
+        return r;
     }
 
 	@Override
