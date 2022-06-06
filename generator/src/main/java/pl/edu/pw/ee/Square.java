@@ -30,6 +30,7 @@ public class Square implements Figure{
         checkSquare(a, b);
         this.a = a;
         this.b = b;
+
     }
 
     public Circle createCircleOnSquare() throws IncorrectFractionException, IllegalMathOperation, SamePointsException{
@@ -124,5 +125,13 @@ public class Square implements Figure{
 
     public Point getB(){
         return b;
+    }
+
+    public Point getC(){
+        return new Point(a.getX(), b.getY());
+    }
+
+    public Point getD(){
+        return new Point(b.getX(), a.getY());
     }
 }
