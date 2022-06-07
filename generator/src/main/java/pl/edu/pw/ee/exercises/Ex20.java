@@ -2,34 +2,46 @@ package pl.edu.pw.ee.exercises;
 
 import java.util.ArrayList;
 
+import pl.edu.pw.ee.Func;
+import pl.edu.pw.ee.Line;
+import pl.edu.pw.ee.Triangle;
+import pl.edu.pw.ee.exceptions.IllegalElementsForThisExerciseException;
+import pl.edu.pw.ee.exceptions.IllegalMathOperation;
+import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 import pl.edu.pw.ee.services.Element;
 import pl.edu.pw.ee.services.Exercise;
 
+//20.Dany jest trójkąt i prosta. Czy funkcja prostej jest taka sama jak funkcja wyznaczona z któregoś bok trójkąta?
 public class Ex20 implements Exercise{
 
-    public Ex20(){
-
-    }
-    
-    public Ex20(ArrayList<Element> list){
-
-    }
+    private Triangle triangle;
+    private Line line;
     
     @Override
     public Object getSolution() {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            Func lineFunc = line.getFunc();
+            Func triangleABFunc = triangle.getSideAB().getFunc();
+            Func triangleBCFunc = triangle.getSideBC().getFunc();
+            Func triangleACFunc = triangle.getSideAC().getFunc();
+            if(lineFunc.equals(triangleABFunc) || lineFunc.equals(triangleBCFunc) || lineFunc.equals(triangleACFunc)){
+                return true;
+            }
+        } catch (IncorrectFractionException | IllegalMathOperation e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
     public String whatToDo() {
-        // TODO Auto-generated method stub
-        return null;
+        return "Czy funkcja prostej jest taka sama jak funkcja wyznaczona z któregoś boku trójkąta?";
     }
     
     @Override
-    public void insertElements(ArrayList<Element> list) {
-        // TODO Auto-generated method stub
-        
+    public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        Element[] el = CommonAssinging.triangleLine(list);
+        triangle = (Triangle)el[0];
+        line = (Line)el[1];
     }
 }

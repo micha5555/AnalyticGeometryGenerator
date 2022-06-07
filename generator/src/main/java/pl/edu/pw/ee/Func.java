@@ -55,5 +55,17 @@ public class Func {
     public String toString(){
         return String.format("%sy=%sx+%s", y.toString(), a.toString(), b.toString());
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+        if(!(o instanceof Func)){
+            return false;
+        }
+        Func f = (Func) o;
+        return y.equals(f.y) && a.equals(f.a) && b.equals(f.b);
+    }
     
 }

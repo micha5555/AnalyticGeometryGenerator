@@ -62,4 +62,97 @@ public class CommonAssinging {
         }
         return (Line)list.get(0);
     }
+
+    //0-square, 1-point
+    public static Element[] squareAndPoint(ArrayList<Element> list) throws IllegalElementsForThisExerciseException{
+        if(list.size() != 2){
+            throw new IllegalElementsForThisExerciseException("Incorrect input!");
+        }
+        Element[] out = new Element[2];
+        out[0] = list.get(0);
+        out[1] = list.get(1);
+        if(out[0] instanceof Square && out[1] instanceof Point){
+            
+        }
+        else if(out[0] instanceof Point && out[1] instanceof Square){
+            Element tmp = out[0];
+            out[0] = out[1];
+            out[1] = tmp;
+        }
+        else{
+            throw new IllegalElementsForThisExerciseException("Incorrect input!");
+        }
+        return out;
+    }
+
+    //0-triangle, 1-point
+    public static Element[] triangleAndPoint(ArrayList<Element> list) throws IllegalElementsForThisExerciseException{
+        if(list.size() != 2){
+            throw new IllegalElementsForThisExerciseException("Incorrect input!");
+        }
+        Element[] out = new Element[2];
+        out[0] = list.get(0);
+        out[1] = list.get(1);
+        if(out[0] instanceof Triangle && out[1] instanceof Point){
+            
+        }
+        else if(out[0] instanceof Point && out[1] instanceof Triangle){
+            Element tmp = out[0];
+            out[0] = out[1];
+            out[1] = tmp;
+        }
+        else{
+            throw new IllegalElementsForThisExerciseException("Incorrect input!");
+        }
+        return out;
+    }
+
+    public static Element[] triangleSquareCircle(ArrayList<Element> list) throws IllegalElementsForThisExerciseException{
+        if(list.size() != 3){
+            throw new IllegalElementsForThisExerciseException("Incorrect input!");
+        }
+        boolean triangleInList = false;
+        boolean squareInList = false;
+        boolean circleleInList = false;
+        Element[] out = new Element[3];
+        for(int i = 0; i < 3; i++){
+            if(list.get(i) instanceof Triangle){
+                triangleInList = true;
+                out[0] = list.get(i);
+            }
+            else if(list.get(i) instanceof Square){
+                squareInList = true;
+                out[1] = list.get(i);
+            }
+            else if(list.get(i) instanceof Circle){
+                circleleInList = true;
+                out[2] = list.get(i);
+            }
+        }
+        if(!(triangleInList && squareInList && circleleInList)){
+            throw new IllegalElementsForThisExerciseException("Incorrect input!");
+        }
+        return out;
+    }
+
+    public static Element[] triangleLine(ArrayList<Element> list) throws IllegalElementsForThisExerciseException{
+        if(list.size() != 2){
+            throw new IllegalElementsForThisExerciseException("Incorrect input!");
+        }
+        Element[] out = new Element[2];
+        out[0] = list.get(0);
+        out[1] = list.get(1);
+        if(out[0] instanceof Triangle && out[1] instanceof Line){
+            
+        }
+        else if(out[0] instanceof Line && out[1] instanceof Triangle){
+            Element tmp = out[0];
+            out[0] = out[1];
+            out[1] = tmp;
+        }
+        else{
+            throw new IllegalElementsForThisExerciseException("Incorrect input!");
+        }
+        return out;
+    }
 }
