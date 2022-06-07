@@ -155,4 +155,25 @@ public class CommonAssinging {
         }
         return out;
     }
+
+    public static Element[] squareTriangle(ArrayList<Element> list) throws IllegalElementsForThisExerciseException{
+        if(list.size() != 2){
+            throw new IllegalElementsForThisExerciseException("Incorrect input!");
+        }
+        Element[] out = new Element[2];
+        out[0] = list.get(0);
+        out[1] = list.get(1);
+        if(out[0] instanceof Square && out[1] instanceof Triangle){
+            
+        }
+        else if(out[0] instanceof Triangle && out[1] instanceof Square){
+            Element tmp = out[0];
+            out[0] = out[1];
+            out[1] = tmp;
+        }
+        else{
+            throw new IllegalElementsForThisExerciseException("Incorrect input!");
+        }
+        return out;
+    }
 }

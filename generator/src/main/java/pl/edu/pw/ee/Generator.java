@@ -5,7 +5,7 @@ import pl.edu.pw.ee.exercises.*;
 import pl.edu.pw.ee.services.Exercise;
 
 public class Generator {
-    private Exercise[] exercises = new Exercise[22];
+    private Exercise[] exercises = new Exercise[21];
 
     public Generator(){
         exercises[0] = new Ex1();
@@ -29,7 +29,6 @@ public class Generator {
         exercises[18] = new Ex19();
         exercises[19] = new Ex20();
         exercises[20] = new Ex21();
-        exercises[21] = new Ex22(); 
     }
 
     // public Exercise generateExercise(){
