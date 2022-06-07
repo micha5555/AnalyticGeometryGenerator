@@ -1,14 +1,13 @@
 package pl.edu.pw.ee;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 import pl.edu.pw.ee.exceptions.SamePointsException;
+import pl.edu.pw.ee.services.Element;
 
-public class Line {
+public class Line implements Element{
     private Point p1, p2;
     public Line(){
         Point first = new Point();

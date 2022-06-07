@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
+import pl.edu.pw.ee.services.Element;
 
-public class Point {
+public class Point implements Element{
     private FractionAggregation x, y;
     public Point(){
         Random rand = new Random();

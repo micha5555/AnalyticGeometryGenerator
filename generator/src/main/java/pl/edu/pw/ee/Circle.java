@@ -4,9 +4,10 @@ import java.util.Random;
 
 import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
+import pl.edu.pw.ee.services.Element;
 import pl.edu.pw.ee.services.Figure;
 
-public class Circle implements Figure{
+public class Circle implements Figure, Element{
 
     FractionAggregation a, b, r, r2;
     private static FractionAggregation PI;

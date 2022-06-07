@@ -3,9 +3,10 @@ package pl.edu.pw.ee;
 import java.util.Random;
 
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
+import pl.edu.pw.ee.services.Element;
 
 //TODO: Dodać skracanie do najprostszej formy
-public class MathVector {
+public class MathVector implements Element{
     private Fraction xx, yy;
 
     public MathVector(){

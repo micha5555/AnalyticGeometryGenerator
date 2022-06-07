@@ -5,9 +5,10 @@ import java.util.Random;
 import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 import pl.edu.pw.ee.exceptions.SamePointsException;
+import pl.edu.pw.ee.services.Element;
 import pl.edu.pw.ee.services.Figure;
 
-public class Square implements Figure{
+public class Square implements Figure, Element{
 
     private Point a, b;
     

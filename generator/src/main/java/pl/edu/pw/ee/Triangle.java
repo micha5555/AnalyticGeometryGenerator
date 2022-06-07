@@ -3,9 +3,10 @@ package pl.edu.pw.ee;
 import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 import pl.edu.pw.ee.exceptions.SamePointsException;
+import pl.edu.pw.ee.services.Element;
 import pl.edu.pw.ee.services.Figure;
 
-public class Triangle implements Figure{
+public class Triangle implements Figure, Element{
     private Point a, b, c;
     private Line sideAB, sideBC, sideAC;
 
