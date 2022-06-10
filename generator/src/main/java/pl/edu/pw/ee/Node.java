@@ -23,27 +23,68 @@ public class Node {
     }
 
     //Define whether can pass into this Node
+    // public boolean canPass(ArrayList<Element> list) /*throws CannotPassException*/{
+    //     if(list.size() == 0 && needed.length == 0){
+    //         return true;
+    //     }
+    //     //tutaj ogarnac
+    //     // if(list.size() != needed.length){
+    //     //     throw new CannotPassException("Cannot pass to this Node");
+    //     // }
+    //     boolean found = false;
+    //     //TODO: przerobic, bo teraz działa dla pojedyńczego zestawu wymagań
+    //     for(int k = 0; k < needed.length; k++){
+    //         for(int i = 0; i < needed[k].length; i++){
+    //             for(int j = 0; j < list.size(); j++){
+    //                 if(list.get(j).getClass().equals(needed[k][i])){
+    //                     found = true;
+    //                 }
+    //             }
+    //             if(!found){
+    //                 //throw new CannotPassException("Cannot pass to this Node");
+    //                 return false;
+    //             }
+    //         }
+    //         if(found){
+    //             return found;
+    //         }
+    //         found = false;
+    //     }
+    //     return true;
+    // }
+
     public boolean canPass(ArrayList<Element> list) throws CannotPassException{
         if(list.size() == 0 && needed.length == 0){
             return true;
         }
-        if(list.size() != needed.length){
+        //tutaj ogarnac
+        if(list.size() != needed[0].length){
             throw new CannotPassException("Cannot pass to this Node");
         }
         boolean found = false;
-        //TODO: przerobic, bo teraz działa dla pojedyńczego zestawu wymagań
+        int cnt = 0;
+        ArrayList<Integer> dontCount = new ArrayList<>();
+        //list.get(j).getClass().equals(needed[k][i])
         for(int i = 0; i < needed.length; i++){
             for(int j = 0; j < list.size(); j++){
-                if(list.get(j).getClass().equals(needed[i])){
-                    found = true;
+                for(int k = 0; k < needed[i].length; k++){
+                    if(list.get(j).getClass().equals(needed[i][k])){
+                        if(dontCount.indexOf(k) != -1){
+                            continue;
+                        }
+                        cnt++;
+                        dontCount.add(k);
+                        break;
+                    }
                 }
             }
-            if(!found){
-                throw new CannotPassException("Cannot pass to this Node");
+            if(cnt == list.size()){
+                return true;
             }
-            found = false;
+            cnt = 0;
+            dontCount.clear();
         }
-        return true;
+        throw new CannotPassException("Cannot pass to this Node");
     }
 
     public Element getElement() throws Exception{
@@ -63,10 +104,11 @@ public class Node {
     public int[] getNextNodesIDs(){
         return nextNodesIDs;
     }
-    
+
     public int getID(){
         return idOfNode;
     }
+
 
     public static Node[] createNodes(){
         Node[] nodes = new Node[13];
@@ -77,7 +119,7 @@ public class Node {
         nodes[4] = new Node(4, new int[]{7, 8, 9}, new int[]{},new Class<?>[][]{}, Circle.class);
         nodes[5] = new Node(5, new int[]{}, new int[]{1, 16, 17},new Class<?>[][]{{Point.class},{Triangle.class},{Square.class}}, Point.class);
         nodes[6] = new Node(6, new int[]{}, new int[]{2, 3, 4, 20},new Class<?>[][]{{Line.class},{Triangle.class}}, Line.class);
-        nodes[7] = new Node(7, new int[]{11, 12}, new int[]{20, 21},new Class<?>[][]{{Point.class},{Line.class},{Square.class},{Circle.class}}, Triangle.class);
+        nodes[7] = new Node(7, new int[]{11, 12}, new int[]{17, 20, 21},new Class<?>[][]{{Point.class},{Line.class},{Square.class},{Circle.class}}, Triangle.class);
         nodes[8] = new Node(8, new int[]{10, 12}, new int[]{16, 21},new Class<?>[][]{{Point.class},{Triangle.class},{Circle.class}}, Square.class);
         nodes[9] = new Node(9, new int[]{10, 11}, new int[]{15},new Class<?>[][]{{Triangle.class},{Square.class},{Circle.class}}, Circle.class);
         nodes[10] = new Node(10, new int[]{}, new int[]{18, 19},new Class<?>[][]{{Square.class, Circle.class}}, Triangle.class);
