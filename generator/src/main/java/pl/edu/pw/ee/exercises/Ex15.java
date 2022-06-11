@@ -2,11 +2,11 @@ package pl.edu.pw.ee.exercises;
 
 import java.util.ArrayList;
 
-import pl.edu.pw.ee.Circle;
 import pl.edu.pw.ee.Fraction;
 import pl.edu.pw.ee.FractionAggregation;
-import pl.edu.pw.ee.Line;
-import pl.edu.pw.ee.Point;
+import pl.edu.pw.ee.elements.Circle;
+import pl.edu.pw.ee.elements.Line;
+import pl.edu.pw.ee.elements.Point;
 import pl.edu.pw.ee.exceptions.IllegalElementsForThisExerciseException;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 import pl.edu.pw.ee.exceptions.SamePointsException;

@@ -4,6 +4,11 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
+import pl.edu.pw.ee.elements.Circle;
+import pl.edu.pw.ee.elements.Line;
+import pl.edu.pw.ee.elements.Point;
+import pl.edu.pw.ee.elements.Square;
+import pl.edu.pw.ee.elements.Triangle;
 import pl.edu.pw.ee.exceptions.CannotPassException;
 import pl.edu.pw.ee.services.Element;
 

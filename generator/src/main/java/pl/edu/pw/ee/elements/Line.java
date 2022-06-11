@@ -1,7 +1,10 @@
-package pl.edu.pw.ee;
+package pl.edu.pw.ee.elements;
 
 import java.util.Random;
 
+import pl.edu.pw.ee.Fraction;
+import pl.edu.pw.ee.FractionAggregation;
+import pl.edu.pw.ee.Func;
 import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 import pl.edu.pw.ee.exceptions.SamePointsException;

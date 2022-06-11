@@ -1,8 +1,10 @@
-package pl.edu.pw.ee;
+package pl.edu.pw.ee.elements;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import pl.edu.pw.ee.Fraction;
+import pl.edu.pw.ee.FractionAggregation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 import pl.edu.pw.ee.services.Element;
 

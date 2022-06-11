@@ -7,9 +7,11 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import pl.edu.pw.ee.elements.Circle;
+import pl.edu.pw.ee.elements.Point;
+import pl.edu.pw.ee.elements.Square;
 import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
-import pl.edu.pw.ee.exceptions.SamePointsException;
 
 public class CircleTest {
 
@@ -89,25 +91,4 @@ public class CircleTest {
         assertEquals(expectedA, actualA);
         assertEquals(expectedB, actualB);
     }
-
-    // @Test
-    // public void tttt() throws IllegalMathOperation, IncorrectFractionException, SamePointsException{
-    //     Square s = new Square();
-    //     System.out.println(s.getA());
-    //     System.out.println(s.getB());
-    //     System.out.println(s.getArea());
-    //     System.out.println(s.getPerimeter());
-    //     System.out.println(s.getSideLen());
-    //     Circle c = s.createCircleOnSquare();
-    //     System.out.println(c.toString());
-    //     Line l = new Line();
-    //     System.out.println(l.getFunc().toString());
-    //     Fraction x = new Fraction(100, 13, 2, 3);
-    //     System.out.println(x);
-    //     FractionAggregation f = new FractionAggregation();
-    //     f.addFraction(x);
-    //     f.addFraction(new Fraction(3, 5));
-    //     f.addFraction(new Fraction(1, 2));
-    //     System.out.println(f.toString());
-    // }
 }

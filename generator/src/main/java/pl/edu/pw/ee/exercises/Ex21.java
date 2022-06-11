@@ -2,8 +2,8 @@ package pl.edu.pw.ee.exercises;
 
 import java.util.ArrayList;
 
-import pl.edu.pw.ee.Square;
-import pl.edu.pw.ee.Triangle;
+import pl.edu.pw.ee.elements.Square;
+import pl.edu.pw.ee.elements.Triangle;
 import pl.edu.pw.ee.exceptions.IllegalElementsForThisExerciseException;
 import pl.edu.pw.ee.services.Element;
 import pl.edu.pw.ee.services.Exercise;

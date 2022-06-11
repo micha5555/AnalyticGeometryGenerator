@@ -3,7 +3,7 @@ package pl.edu.pw.ee.exercises;
 import java.util.ArrayList;
 
 import pl.edu.pw.ee.Func;
-import pl.edu.pw.ee.Line;
+import pl.edu.pw.ee.elements.Line;
 import pl.edu.pw.ee.exceptions.IllegalElementsForThisExerciseException;
 import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
@@ -35,10 +35,7 @@ public class Ex10 implements Exercise{
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
         line = CommonAssinging.oneLine(list);
-        try {
-            bodyOfExercies += " prosta " + line.getFunc();
-        } catch (IncorrectFractionException | IllegalMathOperation e) {
-            e.printStackTrace();
-        }
+        bodyOfExercies += " odcinek o końcach A " + line.getP1();
+        bodyOfExercies += " i B " + line.getP2();
     }
 }

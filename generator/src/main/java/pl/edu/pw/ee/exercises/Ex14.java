@@ -2,8 +2,8 @@ package pl.edu.pw.ee.exercises;
 
 import java.util.ArrayList;
 
-import pl.edu.pw.ee.Line;
-import pl.edu.pw.ee.Point;
+import pl.edu.pw.ee.elements.Point;
+import pl.edu.pw.ee.elements.Line;
 import pl.edu.pw.ee.exceptions.IllegalElementsForThisExerciseException;
 import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;

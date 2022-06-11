@@ -2,6 +2,8 @@ package pl.edu.pw.ee;
 
 import static org.junit.Assert.assertTrue;
 
+import pl.edu.pw.ee.elements.Point;
+import pl.edu.pw.ee.elements.Triangle;
 import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 

@@ -2,8 +2,8 @@ package pl.edu.pw.ee.exercises;
 
 import java.util.ArrayList;
 
-import pl.edu.pw.ee.Point;
-import pl.edu.pw.ee.Square;
+import pl.edu.pw.ee.elements.Point;
+import pl.edu.pw.ee.elements.Square;
 import pl.edu.pw.ee.exceptions.IllegalElementsForThisExerciseException;
 import pl.edu.pw.ee.services.Element;
 import pl.edu.pw.ee.services.Exercise;
@@ -19,7 +19,8 @@ public class Ex13 implements Exercise{
     public Object getSolution() {
         out[0] = square.getC();
         out[1] = square.getD();
-        return out;
+        String outString = out[0].toString() + "    " + out[1].toString();
+        return outString;
     }
 
     @Override

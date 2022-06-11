@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import pl.edu.pw.ee.elements.Line;
+import pl.edu.pw.ee.elements.Point;
 import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 import pl.edu.pw.ee.exceptions.SamePointsException;
@@ -130,22 +132,6 @@ public class LineTest extends LineTestCommon
         this.checkLength(new Line(new Point(0,0), new Point(0,new Fraction(1, 100))), new Fraction(1,100));
     }
 
-    // @Test
-    // public void should_ReturnVectorCorrectly_WhenLineIsNormal() throws SamePointsException{
-    //     this.checkMathVector(new Line(new Point(5,3), new Point(7,-6)), new MathVector(2, -9));
-    // }
-
-    // @Test
-    // public void should_ReturnVectorCorrectly_WhenOnePointIsZeroZero() throws SamePointsException{
-    //     this.checkMathVector(new Line(new Point(0,0), new Point(3,5)), new MathVector(3,5));
-    // }
-
-    // @Test
-    // public void should_ReturnVectorsCorrectly_WhenLinesLayOnAxises() throws SamePointsException{
-    //     this.checkMathVector(new Line(new Point(-1,0), new Point(5,0)), new MathVector(6,0));
-    //     this.checkMathVector(new Line(new Point(0,-7), new Point(0,8)), new MathVector(0,15));
-    // }
-
     @Test
     public void should_CorrectlyCreateParrarelLine() throws SamePointsException, IncorrectFractionException, IllegalMathOperation{
         Line l;
@@ -153,15 +139,6 @@ public class LineTest extends LineTestCommon
         for(int i = 0; i < 10000; i++){
             l = new Line();
             l2 = l.createParallelLine();
-            // System.out.println(l.getP1() + " " + l.getP2() + " " + l2.getP1() + " " + l2.getP2());
-            // if(!l.getFunc().getA().equals(l2.getFunc().getA())){
-            //     // System.out.println(i);
-            //     // System.out.println(l.getFunc());
-            //     // System.out.println(l2.getFunc());
-            //     // System.out.printf("f1 : (%f, %f) (%f, %f)\nf2 : (%f, %f) (%f, %f)\n", l.getP1().getX(), l.getP1().getY(), l.getP2().getX(), l.getP2().getY(), l2.getP1().getX(), l2.getP1().getY(), l2.getP2().getX(), l2.getP2().getY());
-            // }
-
-            // System.out.println(l.getFunc().toString() + "   " + l2.getFunc().toString());
             assertTrue(l.checkParallelism(l2));
         }
     }
@@ -201,71 +178,4 @@ public class LineTest extends LineTestCommon
         Line l2 = new Line(new Point(3, 3), new Point(8, -2));
         FractionAggregation tan = l1.getTangentOfAcuteAngleWithSecondLine(l2);
     }
-    // @Test
-    // public void ttt() throws SamePointsException{
-    //     Line l = new Line(new Point(0, 3), new Point(0, 0));
-    //     Line l2 = l.createParallelLine();
-    //     System.out.println(l.getFunc());
-    //     System.out.println(l2.getFunc());
-    //     assertTrue(l.checkParallelism(l2));
-    // }
-
-    // @Test
-    // public void tt() throws SamePointsException{
-    //     Line l = new Line(new Point(-9,-12), new Point(3,7));
-    //     Line l2 = l.createParallelLine();
-    //     System.out.println(l.getFunc());
-    //     System.out.println(l2.getFunc());
-    // }
-
-    // @Test
-    // public void parrarelDontWork() throws SamePointsException, IncorrectFractionException, IllegalMathOperation{
-    //     Line l = new Line(new Point(new Fraction(1,1), new Fraction(9,2)), new Point(new Fraction(4,1), new Fraction(21,2)));
-    //     Line l2 = l.createParallelLine();
-    //     System.out.println(l2.getP1().toString());
-    //     System.out.println(l2.getP2().toString());
-    // }
-
-    // @Test
-    // public void ttt() throws IncorrectFractionException, SamePointsException, IllegalMathOperation{
-    //     Line l = new Line(new Point(new Fraction(-12, 1), new Fraction(-23, 2)), new Point(new Fraction(-10, 1), new Fraction(5, 1)));
-    //     System.out.println(l.getP1() + " " + l.getP2());
-    //     Line l2 = l.createParallelLine();
-    //     System.out.println();
-    //     System.out.println(l.getP1() + " " + l.getP2());
-    //     System.out.println(l2.getP1() + " " + l2.getP2());
-    // }
-
-    // @Test
-    // public void testttttt() throws SamePointsException, IncorrectFractionException, IllegalMathOperation{
-    //     Line[] tab = new Line[10];
-    //     for(int i = 0; i < 10; i++){
-    //         tab[i] = new Line();
-    //         System.out.println(tab[i].getP1().toString() + " " + tab[i].getP2().toString());
-    //     }
-
-    //     System.out.println();
-
-    //     for(int i = 0; i < 10; i++){
-    //         Line l = tab[i].createParallelLine();
-    //         System.out.println(tab[i].getP1().toString() + " " + tab[i].getP2().toString());
-    //     }
-    // }
-
-    // @Test
-    // public void t() throws SamePointsException, IncorrectFractionException, IllegalMathOperation{
-    //     Line l = new Line(new Point(new Fraction(7, 2), new Fraction(8, 1)), new Point(new Fraction(7, 2), new Fraction(-12, 1)));
-    //     System.out.println(l.getFunc().toString());
-    //     Line l2 = l.createParallelLine();
-    //     System.out.println(l2.getFunc().toString());
-    //     System.out.println(l.getFunc().toString());
-    // }
-
-    // @Test
-    // public void ewrw() throws IncorrectFractionException{
-    //     FractionAggregation f1 = new FractionAggregation(new Fraction(21, 2));
-    //     FractionAggregation f2 = new FractionAggregation(new Fraction(5, 1));
-    //     FractionAggregation out = FractionAggregation.subFA(f1, f2);
-    //     System.out.println(out.toString());
-    // }
 }

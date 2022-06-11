@@ -3,8 +3,8 @@ package pl.edu.pw.ee;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
-
+import pl.edu.pw.ee.elements.Line;
+import pl.edu.pw.ee.elements.Point;
 import pl.edu.pw.ee.exceptions.IllegalMathOperation;
 import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 import pl.edu.pw.ee.exceptions.SamePointsException;
@@ -59,7 +59,4 @@ public abstract class LineTestCommon {
         assertTrue(l.getLength().equals(expectedLen));
     }
 
-    public void checkMathVector(Line l, MathVector expectedVector){
-
-    }
 }
