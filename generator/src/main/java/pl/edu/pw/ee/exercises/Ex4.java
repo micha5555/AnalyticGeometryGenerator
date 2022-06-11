@@ -16,6 +16,7 @@ public class Ex4 implements Exercise{
 
     private Line line1, line2;
     private FractionAggregation out;
+    private String bodyOfExercies = "Dane :";
 
     @Override
     public Object getSolution() {
@@ -31,7 +32,7 @@ public class Ex4 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "oblicz tangens między prostymi";
+        return bodyOfExercies + ". Oblicz tangens między prostymi";
     }
     
     @Override
@@ -39,5 +40,11 @@ public class Ex4 implements Exercise{
         Line[] lines = CommonAssinging.twoLines(list);
         line1 = lines[0];
         line2 = lines[1];
+        try {
+            bodyOfExercies += " prosta " + line1.getFunc();
+            bodyOfExercies += ", prosta " + line2.getFunc();
+        } catch (IncorrectFractionException | IllegalMathOperation e) {
+            e.printStackTrace();
+        }
     }
 }

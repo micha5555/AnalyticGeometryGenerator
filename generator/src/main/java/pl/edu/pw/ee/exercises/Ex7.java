@@ -13,7 +13,8 @@ public class Ex7 implements Exercise{
 
     private Square square;
     private Point out;
-    
+    private String bodyOfExercies = "Dane :";
+
     @Override
     public Object getSolution() {
         out = square.getD();
@@ -22,12 +23,14 @@ public class Ex7 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Oblicz współrzędne czwartego punktu";
+        return bodyOfExercies + ". Oblicz współrzędne czwartego punktu";
     }
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
         square = CommonAssinging.squareAssign(list);
-        
+        bodyOfExercies += " kwadrat o wierzchołkach A " + square.getA();
+        bodyOfExercies += ", B " + square.getB();
+        bodyOfExercies += ", C " + square.getC();
     }
 }

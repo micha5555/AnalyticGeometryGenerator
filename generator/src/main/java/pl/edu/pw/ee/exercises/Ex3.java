@@ -14,6 +14,7 @@ public class Ex3 implements Exercise{
     
     private boolean out;
     private Line line1, line2;
+    private String bodyOfExercies = "Dane :";
 
     @Override
     public Object getSolution() {
@@ -27,7 +28,7 @@ public class Ex3 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "sprawdź, czy proste są równoległe";
+        return bodyOfExercies + ". Sprawdź, czy proste są równoległe";
     }
     
     @Override
@@ -35,5 +36,12 @@ public class Ex3 implements Exercise{
         Line[] lines = CommonAssinging.twoLines(list);
         line1 = lines[0];
         line2 = lines[1];
+        try {
+            bodyOfExercies += " prosta " + line1.getFunc();
+            bodyOfExercies += ", prosta " + line2.getFunc();
+        } catch (IncorrectFractionException | IllegalMathOperation e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -15,6 +15,7 @@ public class Ex11 implements Exercise{
 
     private Triangle triangle;
     private Func out;
+    private String bodyOfExercies = "Dane :";
 
     @Override
     public Object getSolution() {
@@ -28,11 +29,14 @@ public class Ex11 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Wyznacz równanie zawierające symetralną prostej między wierzchołkami A i B";
+        return bodyOfExercies + ". Wyznacz równanie zawierające symetralną prostej między wierzchołkami A i B";
     }
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
         triangle = CommonAssinging.triangleAssign(list);
+        bodyOfExercies += " trójkąt o wierzchołkach A " + triangle.getA();
+        bodyOfExercies += ", B " + triangle.getB();
+        bodyOfExercies += ", C " + triangle.getC();
     }
 }

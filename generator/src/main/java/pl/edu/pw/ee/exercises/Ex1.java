@@ -16,7 +16,7 @@ public class Ex1 implements Exercise{
     //TODO zwrócić uwagę, żeby punkty nie były takie same
     private Point a, b;
     private Fraction out;
-
+    private String bodyOfExercies = "Dane :";
 
     @Override
     public Object getSolution() {
@@ -36,7 +36,7 @@ public class Ex1 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Oblicz odległość między punktami";
+        return bodyOfExercies += ".Oblicz odległość między punktami";
     }
 
     @Override
@@ -49,5 +49,7 @@ public class Ex1 implements Exercise{
         } catch (IncorrectFractionException e) {
             e.printStackTrace();
         }
+        bodyOfExercies += " punkt A " + a;
+        bodyOfExercies += ", punkt B " + b;
     }
 }

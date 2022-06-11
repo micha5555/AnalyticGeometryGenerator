@@ -15,6 +15,7 @@ public class Ex6 implements Exercise{
     
     private Triangle triangle;
     private FractionAggregation out;
+    private String bodyOfExercies = "Dane :";
 
     @Override
     public Object getSolution() {
@@ -28,11 +29,14 @@ public class Ex6 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Oblicz pole trójkąta";
+        return bodyOfExercies + ". Oblicz pole trójkąta";
     }
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
         triangle = CommonAssinging.triangleAssign(list);
+        bodyOfExercies += " trójkąt o wierzchołkach A " + triangle.getA();
+        bodyOfExercies += ", B " + triangle.getB();
+        bodyOfExercies += ", C " + triangle.getC();
     }
 }

@@ -15,7 +15,8 @@ public class Ex10 implements Exercise{
 
     private Line line;
     private Func out;
-    
+    private String bodyOfExercies = "Dane :";
+
     @Override
     public Object getSolution() {
         try {
@@ -28,11 +29,16 @@ public class Ex10 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Wyznacz równanie symetralnej do odcinka";
+        return bodyOfExercies + ". Wyznacz równanie symetralnej do tej prostej";
     }
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
         line = CommonAssinging.oneLine(list);
+        try {
+            bodyOfExercies += " prosta " + line.getFunc();
+        } catch (IncorrectFractionException | IllegalMathOperation e) {
+            e.printStackTrace();
+        }
     }
 }

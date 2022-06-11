@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import pl.edu.pw.ee.Line;
 import pl.edu.pw.ee.Point;
 import pl.edu.pw.ee.exceptions.IllegalElementsForThisExerciseException;
+import pl.edu.pw.ee.exceptions.IllegalMathOperation;
+import pl.edu.pw.ee.exceptions.IncorrectFractionException;
 import pl.edu.pw.ee.services.Element;
 import pl.edu.pw.ee.services.Exercise;
 
@@ -13,7 +15,8 @@ public class Ex14 implements Exercise{
 
     private Line line;
     private Point out;
-    
+    private String bodyOfExercies = "Dane :";
+
     @Override
     public Object getSolution() {
         out = line.getP2();
@@ -22,11 +25,18 @@ public class Ex14 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Oblicz współrzędne punktu B";
+        return bodyOfExercies + ". Oblicz współrzędne punktu B";
     }
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
         line = CommonAssinging.oneLine(list);
+        try {
+            bodyOfExercies += "środek prostej S " + line.getCenter();
+        } catch (IncorrectFractionException | IllegalMathOperation e) {
+            e.printStackTrace();
+        }
+        bodyOfExercies += ", początek prostej A " + line.getP1();
+
     }
 }

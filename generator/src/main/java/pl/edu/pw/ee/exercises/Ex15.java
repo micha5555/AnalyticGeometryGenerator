@@ -18,7 +18,8 @@ public class Ex15 implements Exercise{
 
     private Circle circle1, circle2;
     private FractionAggregation length;
-    
+    private String bodyOfExercies = "Dane :";
+
     @Override
     public Object getSolution() {
         Point s1 = circle1.getCenter();
@@ -42,7 +43,7 @@ public class Ex15 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Oblicz odległość między środkami okręgów";
+        return bodyOfExercies + ". Oblicz odległość między środkami tych okręgów";
     }
     
     @Override
@@ -50,5 +51,7 @@ public class Ex15 implements Exercise{
         Circle[] circles = CommonAssinging.twoCircles(list);
         circle1 = circles[0];
         circle2 = circles[1];
+        bodyOfExercies += " okrąg " + circle1.toString();
+        bodyOfExercies += ", okrąg " + circle2.toString();
     }
 }

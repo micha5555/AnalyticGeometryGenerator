@@ -15,6 +15,7 @@ public class Ex5 implements Exercise{
 
     private Triangle triangle;
     private Point out;
+    private String bodyOfExercies = "Dane :";
 
     @Override
     public Object getSolution() {
@@ -28,11 +29,14 @@ public class Ex5 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Oblicz środek ciężkości trójkąta";
+        return bodyOfExercies + ". Oblicz środek ciężkości trójkąta";
     }
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
         triangle = CommonAssinging.triangleAssign(list);
+        bodyOfExercies += " trójkąt o wierzchołkach A " + triangle.getA();
+        bodyOfExercies += " B " + triangle.getB();
+        bodyOfExercies += " C " + triangle.getC(); 
     }
 }

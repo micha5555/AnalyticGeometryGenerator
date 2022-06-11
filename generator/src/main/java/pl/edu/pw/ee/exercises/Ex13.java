@@ -13,6 +13,8 @@ public class Ex13 implements Exercise{
     
     private Square square;
     private Point[] out = new Point[2];
+    private String bodyOfExercies = "Dane :";
+
     @Override
     public Object getSolution() {
         out[0] = square.getC();
@@ -22,11 +24,13 @@ public class Ex13 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Znajdź pozostałe wierzchołki";
+        return bodyOfExercies + ". Znajdź pozostałe wierzchołki";
     }
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
         square = CommonAssinging.squareAssign(list);
+        bodyOfExercies += " kwadrat o przeciwległych wierzchołkach A " + square.getA();
+        bodyOfExercies += ", B " + square.getB();
     }
 }

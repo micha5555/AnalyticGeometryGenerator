@@ -16,7 +16,8 @@ public class Ex8 implements Exercise{
     
     private Square square;
     private Circle out;
-    
+    private String bodyOfExercies = "Dane :";
+
     @Override
     public Object getSolution() {
         try {
@@ -29,11 +30,13 @@ public class Ex8 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Wyznacz równanie okręgu opisanego na tym kwadracie";
+        return bodyOfExercies + ". Wyznacz równanie okręgu opisanego na tym kwadracie";
     }
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
-        CommonAssinging.squareAssign(list);
+        square = CommonAssinging.squareAssign(list);
+        bodyOfExercies += " kwadrat o przeciwległych bokach A " + square.getA();
+        bodyOfExercies += ", B " + square.getB();
     }
 }

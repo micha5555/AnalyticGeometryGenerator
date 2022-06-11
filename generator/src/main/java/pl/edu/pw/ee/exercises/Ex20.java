@@ -16,7 +16,8 @@ public class Ex20 implements Exercise{
 
     private Triangle triangle;
     private Line line;
-    
+    private String bodyOfExercies = "Dane :";
+
     @Override
     public Object getSolution() {
         try {
@@ -35,7 +36,7 @@ public class Ex20 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Czy funkcja prostej jest taka sama jak funkcja wyznaczona z któregoś boku trójkąta?";
+        return bodyOfExercies + ". Czy funkcja prostej jest taka sama jak funkcja wyznaczona z któregoś boku trójkąta?";
     }
     
     @Override
@@ -43,5 +44,13 @@ public class Ex20 implements Exercise{
         Element[] el = CommonAssinging.triangleLine(list);
         triangle = (Triangle)el[0];
         line = (Line)el[1];
+        bodyOfExercies += " trójkąt o wierzchołkach A " + triangle.getA();
+        bodyOfExercies += ", B " + triangle.getB();
+        bodyOfExercies += ", C " + triangle.getC();
+        try {
+            bodyOfExercies += "; prosta " + line.getFunc();
+        } catch (IncorrectFractionException | IllegalMathOperation e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -14,7 +14,8 @@ public class Ex16 implements Exercise{
     private Square square;
     private Point point;
     private boolean out;
-    
+    private String bodyOfExercies = "Dane :";
+
     @Override
     public Object getSolution() {
         out = square.checkIfPointInSquare(point);
@@ -23,7 +24,7 @@ public class Ex16 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Sprawdź czy punkt zawiera się w kwadracie";
+        return bodyOfExercies + ". Sprawdź czy punkt zawiera się w kwadracie";
     }
     
     @Override
@@ -32,5 +33,8 @@ public class Ex16 implements Exercise{
         el = CommonAssinging.squareAndPoint(list);
         square = (Square)el[0];
         point = (Point)el[1];
+        bodyOfExercies += " kwadrat o przeciwległych wierzchołkach A " + square.getA();
+        bodyOfExercies += ", B " + square.getB();
+        bodyOfExercies += " i punkt " + point.toString();
     }
 }

@@ -18,7 +18,8 @@ public class Ex18 implements Exercise{
     private Triangle triangle;
     private Square square;
     private Circle circle;
-    
+    private String bodyOfExercies = "Dane :";
+
     @Override
     public Object getSolution() {
         FractionAggregation triangleArea = null;
@@ -49,7 +50,7 @@ public class Ex18 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Który obiekt ma największe pole?";
+        return bodyOfExercies + ". Który obiekt ma największe pole?";
     }
     
     @Override
@@ -58,5 +59,11 @@ public class Ex18 implements Exercise{
         triangle = (Triangle)el[0];
         square = (Square)el[1];
         circle = (Circle)el[2];
+        bodyOfExercies += " trójkąt o wierzchołkach A " + triangle.getA();
+        bodyOfExercies += ", B " + triangle.getB();
+        bodyOfExercies += ", C " + triangle.getC();
+        bodyOfExercies += "; kwadrat o przeciwległych wierzchołkach A " + square.getA();
+        bodyOfExercies += ", B " + square.getB();
+        bodyOfExercies += "; okrąg " + circle.toString();
     }
 }

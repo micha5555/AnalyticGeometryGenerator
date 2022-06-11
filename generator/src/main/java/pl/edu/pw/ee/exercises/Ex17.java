@@ -18,7 +18,8 @@ public class Ex17 implements Exercise{
     private Triangle triangle;
     private Point pointX;
     private Func out;
-    
+    private String bodyOfExercies = "Dane :";
+
     @Override
     public Object getSolution() {
         Line ab = triangle.getSideAB();
@@ -38,7 +39,7 @@ public class Ex17 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Wyznacz równanie prostej przechodzącej przez punkt X i przez środek prostej AB";
+        return bodyOfExercies + ". Wyznacz równanie prostej przechodzącej przez punkt X i przez środek prostej AB";
     }
     
     @Override
@@ -46,5 +47,9 @@ public class Ex17 implements Exercise{
         Element[] el = CommonAssinging.triangleAndPoint(list);
         triangle = (Triangle)el[0];
         pointX = (Point)el[1];
+        bodyOfExercies += " trójkąt o wierzchołkach A " + triangle.getA();
+        bodyOfExercies += ", B " + triangle.getB();
+        bodyOfExercies += ", C " + triangle.getC();
+        bodyOfExercies += ", oraz punkt X" + pointX.toString();
     }
 }

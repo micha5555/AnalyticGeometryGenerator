@@ -12,6 +12,7 @@ public class Ex21 implements Exercise{
 
     private Square square;
     private Triangle triangle;
+    private String bodyOfExercies = "Dane :";
 
     @Override
     public Object getSolution() {
@@ -20,7 +21,7 @@ public class Ex21 implements Exercise{
 
     @Override
     public String whatToDo() {
-        return "Czy którykolwiek wierzchołek trójkąta zawiera się w kwadracie?";
+        return bodyOfExercies + ". Czy którykolwiek wierzchołek trójkąta zawiera się w kwadracie?";
     }
     
     @Override
@@ -28,5 +29,10 @@ public class Ex21 implements Exercise{
         Element[] el = CommonAssinging.squareTriangle(list);
         square = (Square)el[0];
         triangle = (Triangle)el[1];
+        bodyOfExercies += " kwadrat o przeciwległych wierzchołkach A " + square.getA();
+        bodyOfExercies += ", B " + square.getB();
+        bodyOfExercies += "; trójkąt o wierzchołkach A " + triangle.getA();
+        bodyOfExercies += ", B " + triangle.getB();
+        bodyOfExercies += ", C " + triangle.getC();
     }
 }
