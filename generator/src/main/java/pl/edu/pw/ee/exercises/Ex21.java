@@ -12,7 +12,7 @@ public class Ex21 implements Exercise{
 
     private Square square;
     private Triangle triangle;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -26,6 +26,7 @@ public class Ex21 implements Exercise{
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies = "Dane : ";
         Element[] el = CommonAssinging.squareTriangle(list);
         square = (Square)el[0];
         triangle = (Triangle)el[1];

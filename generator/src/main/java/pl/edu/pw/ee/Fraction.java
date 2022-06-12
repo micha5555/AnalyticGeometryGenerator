@@ -38,7 +38,7 @@ public class Fraction implements Comparable<Fraction>{
     }
 
     //TODO Nie dodawać/odejmować, gdy różne pierwiastki
-    //dwaa ułamki bo pierwiastki mogą byc różne?
+    //dwa ułamki bo pierwiastki mogą byc różne?
     public static Fraction addFractions(Fraction f1, Fraction f2) throws IncorrectFractionException{
         if(f1.denominator != f2.denominator){
             Fraction[] tmp = makeCommonDenominator(f1, f2);

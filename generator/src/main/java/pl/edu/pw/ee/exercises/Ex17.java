@@ -18,7 +18,7 @@ public class Ex17 implements Exercise{
     private Triangle triangle;
     private Point pointX;
     private Func out;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -44,6 +44,7 @@ public class Ex17 implements Exercise{
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies = "Dane : ";
         Element[] el = CommonAssinging.triangleAndPoint(list);
         triangle = (Triangle)el[0];
         pointX = (Point)el[1];

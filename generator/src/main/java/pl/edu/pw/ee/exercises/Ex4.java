@@ -16,7 +16,7 @@ public class Ex4 implements Exercise{
 
     private Line line1, line2;
     private FractionAggregation out;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -37,6 +37,7 @@ public class Ex4 implements Exercise{
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies = "Dane : ";
         Line[] lines = CommonAssinging.twoLines(list);
         line1 = lines[0];
         line2 = lines[1];

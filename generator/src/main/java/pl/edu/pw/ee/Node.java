@@ -1,7 +1,6 @@
 package pl.edu.pw.ee;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import pl.edu.pw.ee.elements.Circle;
@@ -17,7 +16,7 @@ public class Node {
     private int[] nextNodesIDs;
     private int[] possibleExercises;
     private Class<?>[][] needed;
-    private Class<?> whatNodeGives; //Jaką daną daje Node do puli
+    private Class<?> whatNodeGives; //Which Element is given by this Node
 
     public Node(int id, int[] nextNodesIDs, int[] possibleExercises, Class<?>[][] needed, Class<?> whatGives){
         idOfNode = id;
@@ -28,36 +27,6 @@ public class Node {
     }
 
     //Define whether can pass into this Node
-    // public boolean canPass(ArrayList<Element> list) /*throws CannotPassException*/{
-    //     if(list.size() == 0 && needed.length == 0){
-    //         return true;
-    //     }
-    //     //tutaj ogarnac
-    //     // if(list.size() != needed.length){
-    //     //     throw new CannotPassException("Cannot pass to this Node");
-    //     // }
-    //     boolean found = false;
-    //     //TODO: przerobic, bo teraz działa dla pojedyńczego zestawu wymagań
-    //     for(int k = 0; k < needed.length; k++){
-    //         for(int i = 0; i < needed[k].length; i++){
-    //             for(int j = 0; j < list.size(); j++){
-    //                 if(list.get(j).getClass().equals(needed[k][i])){
-    //                     found = true;
-    //                 }
-    //             }
-    //             if(!found){
-    //                 //throw new CannotPassException("Cannot pass to this Node");
-    //                 return false;
-    //             }
-    //         }
-    //         if(found){
-    //             return found;
-    //         }
-    //         found = false;
-    //     }
-    //     return true;
-    // }
-
     public boolean canPass(ArrayList<Element> list) throws CannotPassException{
         if(list.size() == 0 && needed.length == 0){
             return true;
@@ -69,7 +38,6 @@ public class Node {
         boolean found = false;
         int cnt = 0;
         ArrayList<Integer> dontCount = new ArrayList<>();
-        //list.get(j).getClass().equals(needed[k][i])
         for(int i = 0; i < needed.length; i++){
             for(int j = 0; j < list.size(); j++){
                 for(int k = 0; k < needed[i].length; k++){

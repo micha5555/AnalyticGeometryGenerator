@@ -18,7 +18,7 @@ public class Ex18 implements Exercise{
     private Triangle triangle;
     private Square square;
     private Circle circle;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -55,6 +55,7 @@ public class Ex18 implements Exercise{
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies = "Dane : ";
         Element[] el = CommonAssinging.triangleSquareCircle(list);
         triangle = (Triangle)el[0];
         square = (Square)el[1];

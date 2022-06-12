@@ -14,7 +14,7 @@ public class Ex16 implements Exercise{
     private Square square;
     private Point point;
     private boolean out;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -29,6 +29,7 @@ public class Ex16 implements Exercise{
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies = "Dane : ";
         Element[] el;
         el = CommonAssinging.squareAndPoint(list);
         square = (Square)el[0];

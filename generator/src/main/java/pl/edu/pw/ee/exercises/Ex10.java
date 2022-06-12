@@ -15,7 +15,7 @@ public class Ex10 implements Exercise{
 
     private Line line;
     private Func out;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -34,6 +34,7 @@ public class Ex10 implements Exercise{
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies ="Dane : ";
         line = CommonAssinging.oneLine(list);
         bodyOfExercies += " odcinek o końcach A " + line.getP1();
         bodyOfExercies += " i B " + line.getP2();

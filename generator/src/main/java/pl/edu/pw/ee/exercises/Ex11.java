@@ -15,7 +15,7 @@ public class Ex11 implements Exercise{
 
     private Triangle triangle;
     private Func out;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -34,6 +34,7 @@ public class Ex11 implements Exercise{
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies = "Dane : ";
         triangle = CommonAssinging.triangleAssign(list);
         bodyOfExercies += " trójkąt o wierzchołkach A " + triangle.getA();
         bodyOfExercies += ", B " + triangle.getB();

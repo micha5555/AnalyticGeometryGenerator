@@ -13,7 +13,7 @@ public class Ex7 implements Exercise{
 
     private Square square;
     private Point out;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -28,6 +28,7 @@ public class Ex7 implements Exercise{
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies = "Dane : ";
         square = CommonAssinging.squareAssign(list);
         bodyOfExercies += " kwadrat o wierzchołkach A " + square.getA();
         bodyOfExercies += ", B " + square.getB();

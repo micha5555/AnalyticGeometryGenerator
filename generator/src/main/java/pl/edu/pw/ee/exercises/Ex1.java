@@ -16,7 +16,7 @@ public class Ex1 implements Exercise{
     //TODO zwrócić uwagę, żeby punkty nie były takie same
     private Point a, b;
     private Fraction out;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -41,6 +41,7 @@ public class Ex1 implements Exercise{
 
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies = "Dane : ";
         Point[] points = CommonAssinging.twoPoints(list);
         a = points[0];
         b = points[1];

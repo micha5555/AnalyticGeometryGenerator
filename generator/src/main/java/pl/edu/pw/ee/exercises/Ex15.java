@@ -18,7 +18,7 @@ public class Ex15 implements Exercise{
 
     private Circle circle1, circle2;
     private FractionAggregation length;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -48,6 +48,7 @@ public class Ex15 implements Exercise{
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies = "Dane : ";
         Circle[] circles = CommonAssinging.twoCircles(list);
         circle1 = circles[0];
         circle2 = circles[1];

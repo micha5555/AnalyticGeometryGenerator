@@ -15,7 +15,7 @@ public class Ex14 implements Exercise{
 
     private Line line;
     private Point out;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -30,6 +30,7 @@ public class Ex14 implements Exercise{
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies = "Dane : ";
         line = CommonAssinging.oneLine(list);
         try {
             bodyOfExercies += "środek prostej S " + line.getCenter();

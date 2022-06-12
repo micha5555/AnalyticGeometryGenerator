@@ -14,7 +14,7 @@ public class Ex3 implements Exercise{
     
     private boolean out;
     private Line line1, line2;
-    private String bodyOfExercies = "Dane :";
+    private String bodyOfExercies;
 
     @Override
     public Object getSolution() {
@@ -33,6 +33,7 @@ public class Ex3 implements Exercise{
     
     @Override
     public void insertElements(ArrayList<Element> list) throws IllegalElementsForThisExerciseException {
+        bodyOfExercies = "Dane : ";
         Line[] lines = CommonAssinging.twoLines(list);
         line1 = lines[0];
         line2 = lines[1];
