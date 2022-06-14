@@ -11,7 +11,7 @@ import pl.edu.pw.ee.services.Exercise;
 
 public class Generator {
     private Exercise[] exercises = new Exercise[21];
-    Node[] nodes;
+    private Node[] nodes;
 
     public Generator(){
         nodes = Node.createNodes();
@@ -55,9 +55,6 @@ public class Generator {
             int[] possibleNextNodes = actual.getNextNodesIDs();
             realPossibleExercises = getRealPossibleExercises(elements, possibleExercises);
             realPossibleNodes = getRealPossibleNodes(elements, possibleNextNodes);
-            // System.out.println(actual.getID());
-            // System.out.println("Size of exerc: " + realPossibleExercises.size());
-            // System.out.println("Size of nodes: " + realPossibleNodes.size());
             int id = rand.nextInt(realPossibleExercises.size() + realPossibleNodes.size());
             if(id < realPossibleExercises.size()){
                 return realPossibleExercises.get(id);

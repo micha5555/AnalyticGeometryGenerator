@@ -11,7 +11,7 @@ import pl.edu.pw.ee.services.Figure;
 
 public class Circle implements Figure, Element{
 
-    FractionAggregation a, b, r, r2;
+    private FractionAggregation a, b, r, r2;
     private static FractionAggregation PI;
 
 

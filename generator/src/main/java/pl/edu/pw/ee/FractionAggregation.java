@@ -81,7 +81,6 @@ public class FractionAggregation {
             Fraction tmp = f1Copy.getFraction(i);
             for(int j = 0; j < f2Copy.getSize(); j++){
                 if(f2Copy.getFraction(j).getNumeratorSqr() == tmp.getNumeratorSqr()){
-                    //TU WYWALA!
                     tmp = Fraction.subFractions(tmp, f2Copy.getFraction(j));
                     f2Copy.removeFraction(j);
                     j--;

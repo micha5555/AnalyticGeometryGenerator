@@ -197,7 +197,6 @@ public class Line implements Element{
         FractionAggregation p2Y = new FractionAggregation(new Fraction(0,1));
         FractionAggregation p2X = new FractionAggregation(new Fraction(0,1));
 
-        //TUTAJ ROZWALA PUNKTY
         if(this.getFunc().getY().equals(new FractionAggregation(new Fraction(0, 1)))){
             do{
                 p2X = new FractionAggregation(new Fraction((rand.nextInt(48) - 24), 2));
@@ -266,11 +265,5 @@ public class Line implements Element{
         FractionAggregation out = FractionAggregation.divideFA(aDiff, denominator);
         out.abs();
         return out;
-    }
-
-    //TODO: delete
-    public void showFunc() throws IncorrectFractionException, IllegalMathOperation{
-        Func tmp = this.getFunc();
-        System.out.println(tmp);
     }
 }

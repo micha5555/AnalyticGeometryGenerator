@@ -14,7 +14,6 @@ import pl.edu.pw.ee.services.Element;
 import pl.edu.pw.ee.services.Exercise;
 //17.Dany jest trójkąt o punktach A B C. Wyznacz równanie prostej przechodzącej przez punkt X i przez środek prostej AB.
 public class Ex17 implements Exercise{
-//TODO zwrócić uwagę, żeby X i centerAB nie były takie same
     private Triangle triangle;
     private Point pointX;
     private Func out;
